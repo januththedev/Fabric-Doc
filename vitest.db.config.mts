@@ -17,6 +17,7 @@ export default defineConfig({
     environment: "node",
     include: ["tests/db/**/*.test.ts"],
     globalSetup: ["./tests/db/global-setup.ts"],
+    globals: true,
     fileParallelism: false,
     testTimeout: 20_000,
     env: { DATABASE_URL: TEST_URL, DATABASE_URL_UNPOOLED: TEST_URL },
