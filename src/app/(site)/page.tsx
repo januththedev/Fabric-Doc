@@ -1,10 +1,29 @@
-// Placeholder: Task 5 replaces this with the full landing page (its h1 is "We Don't Just Clean — We Care For Your Health.").
-export default function HomePage() {
+import type { Metadata } from "next";
+import { Hero } from "@/components/home/hero";
+import { ProcessTimeline } from "@/components/home/process-timeline";
+import { ServicesShowcase } from "@/components/home/services-showcase";
+import { SocialProof } from "@/components/home/social-proof";
+import { CtaBanner } from "@/components/shared/cta-banner";
+import { getMoments, getReviews, getServices } from "@/server/queries";
+
+export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: { absolute: "Fabric Doctor | Sofa, Mattress, Chair & Carpet Deep Cleaning in Sri Lanka" },
+  description:
+    "Fabric Doctor deep-cleans and sanitizes sofas, mattresses, chairs and carpets in Sri Lanka. Stain and allergen removal, always open 24/7 — book on WhatsApp.",
+};
+
+export default async function HomePage() {
+  const [reviews, moments, services] = await Promise.all([getReviews(), getMoments(), getServices()]);
+
   return (
-    <section className="bg-night pb-24 pt-40">
-      <div className="container-x">
-        <h1 className="font-display text-5xl text-white">Fabric Doctor</h1>
-      </div>
-    </section>
+    <>
+      <Hero />
+      <ServicesShowcase services={services} />
+      <ProcessTimeline />
+      <SocialProof reviews={reviews} moments={moments} />
+      <CtaBanner />
+    </>
   );
 }

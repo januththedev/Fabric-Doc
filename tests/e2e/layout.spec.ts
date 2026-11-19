@@ -12,12 +12,10 @@ test("navbar, footer and floating WhatsApp", async ({ page }) => {
   for (const name of ["Home", "Reviews & Moments", "About", "Contact"]) {
     await expect(nav.getByRole("link", { name })).toBeVisible();
   }
+  // On a phone the "WhatsApp Us" button lives inside the open menu; on desktop it is in the bar.
+  const cta = (width < 768 ? page.getByRole("dialog") : page).getByRole("link", { name: "WhatsApp Us" }).first();
+  await expect(cta).toHaveAttribute("href", /^https:\/\/wa\.me\/94740594100\?text=/);
   if (width < 768) await page.keyboard.press("Escape");
-
-  await expect(page.getByRole("link", { name: "WhatsApp Us" }).first()).toHaveAttribute(
-    "href",
-    /^https:\/\/wa\.me\/94740594100\?text=/,
-  );
   await expect(page.getByRole("link", { name: "Chat with Fabric Doctor on WhatsApp" })).toBeVisible();
 
   const footer = page.getByRole("contentinfo");

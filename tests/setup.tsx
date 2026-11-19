@@ -13,3 +13,14 @@ vi.mock("next/image", () => ({
     return createElement("img", rest);
   },
 }));
+
+// jsdom has no IntersectionObserver (used by motion's whileInView). A no-op stand-in is enough for unit tests.
+class IntersectionObserverStub {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+}
+vi.stubGlobal("IntersectionObserver", IntersectionObserverStub);
