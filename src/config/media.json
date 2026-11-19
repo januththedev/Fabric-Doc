@@ -1,0 +1,52 @@
+{
+  "hero": {
+    "src": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=80",
+    "alt": "Bright modern living room with a comfortable fabric sofa and armchairs"
+  },
+  "about": {
+    "src": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1400&q=80",
+    "alt": "Cleaning specialist in gloves and a mask wiping a window frame"
+  },
+  "services": {
+    "sofa-cleaning": {
+      "src": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1400&q=80",
+      "alt": "Green fabric sofa in a bright, freshly cleaned living room"
+    },
+    "mattress-cleaning": {
+      "src": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Neatly made bed with a tufted headboard in a sunlit bedroom"
+    },
+    "chair-cleaning": {
+      "src": "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Bright dining room with upholstered green dining chairs around a table"
+    },
+    "carpet-cleaning": {
+      "src": "https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Freshly cleaned patterned rug partly rolled out on a floor"
+    }
+  },
+  "seedReviews": [
+    {
+      "src": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Fresh, clean mattress with pillows made up in a calm bedroom"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Dark fabric sectional sofa in a tidy living room after deep cleaning"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Soft grey carpet being cleaned in a bright living room"
+    }
+  ],
+  "adminSeed": [
+    {
+      "src": "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Three-seater sofa restored to a like-new finish"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Yellow fabric armchair with a fresh, clean finish"
+    }
+  ]
+}
