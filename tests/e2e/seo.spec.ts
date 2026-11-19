@@ -26,7 +26,7 @@ test("robots and sitemap", async ({ request }) => {
   const robots = await (await request.get("/robots.txt")).text();
   expect(robots).toContain("Disallow: /admin");
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  for (const p of ["/reviews", "/about", "/contact"]) expect(sitemap).toContain(p);
+  for (const p of ["/reviews", "/about", "/contact", "/care-guide", "/services/sofa-cleaning"]) expect(sitemap).toContain(p);
   expect(sitemap).not.toContain("/admin");
 });
 

@@ -31,7 +31,7 @@ export function ProblemsBento() {
           </p>
         </div>
 
-        <div className="mt-12 grid auto-rows-[15rem] grid-cols-1 gap-4 md:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-4 md:auto-rows-[15rem] md:grid-cols-4">
           {PROBLEMS.map((p, i) => {
             const img = MEDIA.gallery[p.image];
             return (

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Accent } from "@/components/shared/accent";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { STAIN_FIRST_AID } from "@/config/content";
@@ -32,6 +33,12 @@ export function CareTeaser() {
               </li>
             ))}
           </ol>
+          <Link
+            href="/care-guide"
+            className="relative mt-8 inline-block font-semibold text-brand-strong after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
+          >
+            Read the full Stain &amp; Care Guide →
+          </Link>
         </div>
         <div className="group relative order-1 aspect-[4/3] overflow-hidden rounded-[2rem] lg:order-2">
           <Image
