@@ -7,13 +7,6 @@ import type { MEDIA } from "./media";
 
 type GalleryKey = keyof (typeof MEDIA)["gallery"];
 
-export const TRUST_POINTS = [
-  { icon: "clock", title: "Always open, 24/7", text: "Book any time — day, night or weekend." },
-  { icon: "home", title: "We come to you", text: "Deep cleaning done at your doorstep." },
-  { icon: "leaf", title: "Fabric-safe solutions", text: "Chosen for the fabric in front of us." },
-  { icon: "chat", title: "One message to book", text: "Send a photo on WhatsApp, get a quote." },
-] as const;
-
 export const PROBLEMS: { title: string; text: string; image: GalleryKey }[] = [
   {
     title: "Stains & spills",
@@ -39,22 +32,18 @@ export const PROBLEMS: { title: string; text: string; image: GalleryKey }[] = [
 
 export const AUDIENCES = [
   {
-    icon: "baby",
     title: "Homes with little ones",
     text: "Children sit, nap, snack and play on fabric. A deep clean lifts what wiping never reaches.",
   },
   {
-    icon: "paw",
     title: "Pet owners",
     text: "We work hair, dander and accidents out of the fibres rather than just off the surface.",
   },
   {
-    icon: "wind",
     title: "Allergy-prone families",
     text: "Deep extraction helps reduce the dust mites and allergens that build up in mattresses and sofas.",
   },
   {
-    icon: "building",
     title: "Offices & rentals",
     text: "Office chairs, waiting areas and furnished rentals refreshed between busy weeks or guests.",
   },
