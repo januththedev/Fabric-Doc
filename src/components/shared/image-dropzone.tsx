@@ -29,7 +29,8 @@ export function ImageDropzone({ file, previewUrl, onSelect, onRemove, onReject, 
     onDropRejected: () => onReject?.("Please choose a JPG, PNG, WebP or HEIC photo."),
   });
 
-  if (file && previewUrl) {
+  // `file` is informational; any preview URL (e.g. an already-saved photo) is shown the same way.
+  if (previewUrl) {
     return (
       <div className="relative w-full max-w-xs overflow-hidden rounded-2xl ring-1 ring-slate-200">
         {/* eslint-disable-next-line @next/next/no-img-element -- blob: preview URL, not optimisable */}

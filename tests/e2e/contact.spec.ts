@@ -42,5 +42,8 @@ test("contact: demo mode blocks saving with an alert", async ({ page }) => {
 
   await page.getByRole("button", { name: "Send Inquiry" }).click();
 
-  await expect(page.getByRole("alert")).toHaveText("Demo mode: connect a database to save inquiries.");
+  // Next.js keeps its own hidden role="alert" route announcer, so match ours by its text.
+  await expect(page.getByRole("alert").filter({ hasText: "Demo mode" })).toHaveText(
+    "Demo mode: connect a database to save inquiries.",
+  );
 });
