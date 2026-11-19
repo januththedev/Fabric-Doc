@@ -1,6 +1,7 @@
 import { Client } from "pg";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test } from "vitest";
 
+type Query = [string, unknown[]];
 let c: Client;
 
 beforeAll(async () => {
@@ -31,7 +32,7 @@ async function failure(text: string, values: unknown[] = []) {
   throw new Error("statement unexpectedly succeeded");
 }
 
-const reviewInsert = (over: Record<string, unknown> = {}) => {
+const reviewInsert = (over: Record<string, unknown> = {}): Query => {
   const r = {
     reviewer_name: "Dilini",
     service_type: "Sofa Deep Cleaning",
@@ -43,10 +44,10 @@ const reviewInsert = (over: Record<string, unknown> = {}) => {
   return [
     "insert into reviews (reviewer_name, service_type, rating, comment, image_url) values ($1,$2,$3,$4,$5) returning id",
     [r.reviewer_name, r.service_type, r.rating, r.comment, r.image_url],
-  ] as const;
+  ];
 };
 
-const serviceInsert = (over: Record<string, unknown> = {}) => {
+const serviceInsert = (over: Record<string, unknown> = {}): Query => {
   const s = {
     slug: "test-a",
     title: "Test Service A",
@@ -57,7 +58,7 @@ const serviceInsert = (over: Record<string, unknown> = {}) => {
   return [
     "insert into services (slug, title, short_desc, highlights) values ($1,$2,$3,$4) returning id",
     [s.slug, s.title, s.short_desc, s.highlights],
-  ] as const;
+  ];
 };
 
 describe("reviews", () => {
@@ -82,8 +83,10 @@ describe("reviews", () => {
 
 describe("moments", () => {
   const reviewId = async () => (await c.query(...reviewInsert())).rows[0].id as string;
-  const insertMoment = (cols: string, vals: unknown[]) =>
-    [`insert into moments (${cols}) values (${vals.map((_, i) => `$${i + 1}`).join(",")})`, vals] as const;
+  const insertMoment = (cols: string, vals: unknown[]): Query => [
+    `insert into moments (${cols}) values (${vals.map((_, i) => `$${i + 1}`).join(",")})`,
+    vals,
+  ];
 
   test("a review moment needs a review_id", async () => {
     expect(await failure(...insertMoment("image_url, source_type", ["https://x.test/a.jpg", "review"]))).toEqual({
@@ -149,11 +152,10 @@ describe("services", () => {
 });
 
 describe("inquiries and rate limits", () => {
-  const inquiry = (phone: string) =>
-    [
-      "insert into inquiries (name, phone, service_type, city) values ('Kasun', $1, 'Sofa Deep Cleaning', 'Kandy')",
-      [phone],
-    ] as const;
+  const inquiry = (phone: string): [string, unknown[]] => [
+    "insert into inquiries (name, phone, service_type, city) values ('Kasun', $1, 'Sofa Deep Cleaning', 'Kandy')",
+    [phone],
+  ];
 
   test("phone must be E.164", async () => {
     expect(await failure(...inquiry("0740594100"))).toEqual({ code: "23514", constraint: "inquiries_phone_check" });
