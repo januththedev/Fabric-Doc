@@ -58,3 +58,37 @@ export async function recordHit(bucket: string, key: string): Promise<void> {
   // Housekeeping: nothing older than a day is ever needed.
   await db.delete(rateLimits).where(lt(rateLimits.createdAt, sql`now() - interval '1 day'`));
 }
+
+// ---------- reviews (Task 7) ----------
+
+/** One transaction: the review, plus its Moment when it carries a photo. Guests never write Moments directly. */
+export async function createReviewWithMoment(input: {
+  reviewerName: string;
+  serviceType: string;
+  rating: number;
+  comment: string;
+  imageUrl: string | null;
+}): Promise<{ review: Review; moment: Moment | null }> {
+  return getDb().transaction(async (tx) => {
+    const [row] = await tx
+      .insert(reviews)
+      .values({
+        reviewerName: input.reviewerName,
+        serviceType: input.serviceType,
+        rating: input.rating,
+        comment: input.comment,
+        imageUrl: input.imageUrl,
+      })
+      .returning();
+
+    let moment: Moment | null = null;
+    if (input.imageUrl) {
+      const [m] = await tx
+        .insert(moments)
+        .values({ imageUrl: input.imageUrl, sourceType: "review", reviewerName: input.reviewerName, reviewId: row.id })
+        .returning();
+      moment = mapMoment(m);
+    }
+    return { review: mapReview(row), moment };
+  });
+}

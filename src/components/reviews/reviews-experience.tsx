@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { ReviewForm } from "@/components/reviews/review-form";
 import { MomentsGallery } from "@/components/reviews/moments-gallery";
 import { MoreReviews } from "@/components/reviews/more-reviews";
 import { ReviewCard } from "@/components/reviews/review-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { splitReviews } from "@/lib/reviews";
-import type { Moment, Review } from "@/lib/types";
+import type { Moment, Review, Service } from "@/lib/types";
 
 /**
  * Owns the page's scroll order, which must never change:
@@ -16,19 +17,23 @@ import type { Moment, Review } from "@/lib/types";
 export function ReviewsExperience({
   initialReviews,
   initialMoments,
+  services = [],
 }: {
   initialReviews: Review[];
   initialMoments: Moment[];
+  services?: readonly Pick<Service, "title">[];
 }) {
   const [reviews, setReviews] = useState(initialReviews);
   const [moments, setMoments] = useState(initialMoments);
   const { lead, rest } = splitReviews(reviews);
 
-  // Used by the review form in Task 7.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSubmitted = (review: Review, moment: Moment | null) => {
     setReviews((prev) => [review, ...prev]);
     if (moment) setMoments((prev) => [moment, ...prev]);
+    // Bring the new review into view once it has rendered.
+    requestAnimationFrame(() =>
+      document.getElementById(`review-${review.id}`)?.scrollIntoView({ behavior: "smooth", block: "center" }),
+    );
   };
 
   return (
@@ -38,7 +43,7 @@ export function ReviewsExperience({
           <div className="mx-auto max-w-2xl rounded-3xl bg-surface p-6 shadow-soft ring-1 ring-slate-200/70 sm:p-8">
             <h2 className="font-display text-3xl font-semibold tracking-tight text-ink">Leave a Review</h2>
             <p className="mt-2 text-slate-600">No account needed — it takes less than a minute.</p>
-            {/* The review form is added in Task 7. */}
+            <ReviewForm services={services} onSubmitted={handleSubmitted} />
           </div>
         </div>
       </section>
@@ -52,7 +57,7 @@ export function ReviewsExperience({
           ) : (
             <div className="grid gap-6 md:grid-cols-2">
               {lead.map((r) => (
-                <div key={r.id} data-testid="lead-review">
+                <div key={r.id} id={`review-${r.id}`} data-testid="lead-review">
                   <ReviewCard review={r} />
                 </div>
               ))}

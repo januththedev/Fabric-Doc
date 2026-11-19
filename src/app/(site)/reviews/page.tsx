@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ReviewsExperience } from "@/components/reviews/reviews-experience";
 import { StarRating } from "@/components/shared/star-rating";
 import { BUSINESS_INFO } from "@/config/business";
-import { getMoments, getReviews } from "@/server/queries";
+import { getMoments, getReviews, getServices } from "@/server/queries";
 
 export const revalidate = 60;
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ReviewsPage() {
-  const [reviews, moments] = await Promise.all([getReviews(), getMoments()]);
+  const [reviews, moments, services] = await Promise.all([getReviews(), getMoments(), getServices()]);
   const { stats } = BUSINESS_INFO;
 
   return (
@@ -34,7 +34,7 @@ export default async function ReviewsPage() {
           </p>
         </div>
       </section>
-      <ReviewsExperience initialReviews={reviews} initialMoments={moments} />
+      <ReviewsExperience initialReviews={reviews} initialMoments={moments} services={services} />
     </>
   );
 }
