@@ -16,7 +16,8 @@ const underline =
 
 export function Navbar() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  // Pages that open with a dark header: the bar floats transparent over it until the page scrolls.
+  const overDark = pathname === "/" || pathname === "/about" || pathname === "/contact";
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -26,15 +27,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // On the home page the bar floats over the dark hero until the page scrolls.
-  const glass = !isHome || scrolled;
+  const glass = !overDark || scrolled;
 
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300",
         glass
-          ? "border-b border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-xl"
+          ? "border-b border-slate-200/70 bg-white/95 shadow-sm backdrop-blur-xl"
           : "border-b border-transparent bg-transparent",
       )}
     >

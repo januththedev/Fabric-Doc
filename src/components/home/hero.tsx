@@ -29,8 +29,8 @@ export function Hero() {
         <Image src={MEDIA.hero.src} alt={MEDIA.hero.alt} fill priority sizes="100vw" className="object-cover" />
       </motion.div>
       {/* Scrim: keeps the headline readable over the photo. */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-night/90 via-night/65 to-night" />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-night/70 via-night/10 to-transparent" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-night/85 via-night/50 to-night/95" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-night/65 via-night/10 to-transparent" />
 
       <div className="container-x pb-20 pt-32">
         <div className="max-w-3xl">

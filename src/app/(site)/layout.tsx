@@ -3,6 +3,7 @@ import { DemoBanner } from "@/components/layout/demo-banner";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { JsonLd } from "@/components/shared/json-ld";
 import { getServices } from "@/server/queries";
 
 export default async function SiteLayout({ children }: { children: ReactNode }) {
@@ -15,6 +16,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
       >
         Skip to content
       </a>
+      <JsonLd />
       <DemoBanner />
       <Navbar />
       <main id="main">{children}</main>

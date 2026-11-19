@@ -5,6 +5,8 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  // Unit tests never need real CSS; skip the Tailwind PostCSS pipeline.
+  css: { postcss: { plugins: [] } },
   resolve: {
     alias: { "server-only": fileURLToPath(new URL("./tests/stubs/server-only.ts", import.meta.url)) },
   },
