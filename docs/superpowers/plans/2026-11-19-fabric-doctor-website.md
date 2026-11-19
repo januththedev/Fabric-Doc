@@ -22,7 +22,7 @@ These apply to every task.
 - **Motion (alive, not busy):** `import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"`. Four layers only: (1) the hero **enters once on load**; (2) a **hover and press layer** on every interactive element (CSS, see Visual language); (3) **one dealt scroll moment per page**, always inside its own section (Home: the process line draws; Reviews: the Moments tiles resolve in; About: the tagline's words light up; Contact: none beyond layers 1 and 2); (4) small live details (the pulsing "Always Open" dot, the WhatsApp ping). **Never:** a fade-in on every section or card, parallax, tilt, carousels, timed tabs, or anything that moves only because the page scrolled outside a dealt moment. Every animation checks `useReducedMotion()`; with reduced motion the final state shows at once and nothing stays hidden.
 - **Database & secrets:** the browser never talks to the database. Only server code (`src/db`, `src/server`) imports `pg` or Drizzle, and every such file starts with `import "server-only"`. `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH` and `AUTH_SECRET` are server-only: never prefix them with `NEXT_PUBLIC_`, never log them. Every admin Server Action and route handler starts with `await requireAdmin()`.
 - **Single source of truth:** all business facts (name, phone, URLs, hours, stats, process steps) come from `src/config/business.ts`. **Services live in the `services` database table** and are edited in the admin; `DEFAULT_SERVICES` in `business.ts` is only the demo-mode copy (the migration inserts the same four rows). Image URLs for the default content come from `src/config/media.json`. Before each commit, `grep -rn "0740594100\|074 059 4100\|wa.me\|facebook.com" src --include=*.tsx` must return **no matches** outside `src/config/`.
-- **Services scope:** Fabric Doctor cleans **sofas, mattresses, chairs and carpets only**. Never mention cars, vehicles or car interiors in code, copy, tests, SEO or seed data. `grep -rniE '\bcars?\b|car interior|vehicle' src supabase tests` must return nothing.
+- **Services scope:** Fabric Doctor cleans **sofas, mattresses, chairs and carpets only**. Never mention cars, vehicles or car interiors in code, copy, tests, SEO or seed data. `grep -rniE '\bcars?\b|car interior|vehicle' src` must return nothing (the one test that asserts this lives in `tests/` and is excluded).
 - **No invented facts:** don't invent years in business, addresses, prices, certifications, staff names, chemical brands or statistics beyond `BUSINESS_INFO`. Health copy may say a service "helps reduce" or "removes" allergens. It must never promise a medical outcome.
 - **Copy:** text in quotes in this plan or the brief is final. Use it verbatim. Display the phone as `074 059 4100`.
 - **Colour & contrast (WCAG 2.2 AA):** on light backgrounds, brand text and solid buttons use **teal-700 `#0F766E`** (white on it = 5.5:1). Use `#0D9488` / `#14B8A6` only for icons, decorative accents, large display text, or text on dark backgrounds. Dark sections use `#0F172A`, the hero uses `#0B1120`, and the light surface is warm linen `#F7F5F0` (cards stay pure white on top of it).
@@ -664,13 +664,14 @@ test("listInquiries is newest first");
 ### Task 5: Landing page (`/`)
 
 **Files:**
-- Create: `src/components/home/{hero,services-showcase,process-timeline,social-proof}.tsx`, `src/components/shared/{cta-banner,star-rating}.tsx`
+- Create: `src/lib/reviews.ts`, `src/components/home/{hero,services-showcase,process-timeline,social-proof}.tsx`, `src/components/shared/{cta-banner,star-rating}.tsx`
 - Modify: `src/app/(site)/page.tsx`
-- Test: `tests/e2e/home.spec.ts`
+- Test: `tests/unit/reviews-lib.test.ts`, `tests/e2e/home.spec.ts`
 
 **Interfaces:**
-- Consumes: `getReviews`, `getMoments`, `getServices`, `pickFeaturedReviews`, `BUSINESS_INFO`, `PROCESS_STEPS`, `MEDIA`, `buildWhatsAppUrl`, `buildServiceMessage`, `Reveal`, `SectionHeading`
+- Consumes: `getReviews`, `getMoments`, `getServices`, `BUSINESS_INFO`, `PROCESS_STEPS`, `MEDIA`, `buildWhatsAppUrl`, `buildServiceMessage`, `Reveal`, `SectionHeading`
 - Produces:
+  - `src/lib/reviews.ts`: `splitReviews(reviews: Review[], leadCount?: number): { lead: Review[]; rest: Review[] }` (default `REVIEW_LEAD_COUNT`; `lead` is the first `leadCount` reviews, `rest` the others) and `pickFeaturedReviews(reviews: Review[], count = 3): Review[]` (five-star reviews only, newest first). Unit tests: the first four split from the rest; fewer reviews than the lead count (and an empty list) give an empty `rest`; featured keeps only 5-star reviews newest first and respects `count`.
   - `<StarRating value: number size?: "sm"|"md" />`: renders `role="img"` with `aria-label="Rated {n} out of 5"`, filled amber-400 stars.
   - `<CtaBanner />`: reused on About.
 
