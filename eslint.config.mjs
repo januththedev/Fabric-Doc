@@ -13,6 +13,7 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     ignores: [
+      ".taste-skill/**",
       "node_modules/**",
       ".next/**",
       "out/**",
