@@ -4,7 +4,7 @@ import { isDemoMode } from "@/lib/env";
 export function DemoBanner() {
   if (!isDemoMode()) return null;
   return (
-    <div role="status" className="bg-teal-50 px-4 py-1.5 text-center text-xs font-medium text-teal-900">
+    <div role="status" className="pointer-events-none fixed bottom-4 left-4 z-40 rounded-full bg-ink/90 px-3.5 py-1.5 text-xs font-medium text-white shadow-lg backdrop-blur">
       Demo mode — showing sample data.
     </div>
   );

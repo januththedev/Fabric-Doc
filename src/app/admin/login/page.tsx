@@ -11,7 +11,7 @@ export default function AdminLoginPage() {
     <main className="grid min-h-screen place-items-center bg-surface px-4 py-16">
       <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-soft ring-1 ring-slate-200/70 sm:p-10">
         <Logo />
-        <h1 className="mt-6 font-display text-3xl font-semibold tracking-tight text-ink">Admin Sign In</h1>
+        <h1 className="mt-6 font-display text-3xl font-extrabold tracking-tight text-ink">Admin Sign In</h1>
         {isAuthConfigured() ? (
           <LoginForm />
         ) : (

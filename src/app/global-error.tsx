@@ -13,8 +13,8 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
     <html lang="en">
       <body className="grid min-h-screen place-items-center bg-night px-4 font-sans text-white antialiased">
         <main className="max-w-md text-center">
-          <p className="font-display text-6xl font-semibold text-brand-bright">Oops</p>
-          <h1 className="mt-4 font-display text-3xl font-semibold">Something went wrong</h1>
+          <p className="font-display text-6xl font-extrabold text-brand-bright">Oops</p>
+          <h1 className="mt-4 font-display text-3xl font-extrabold">Something went wrong</h1>
           <p className="mt-4 text-slate-300">Please try again in a moment.</p>
           <div className="mt-8 flex justify-center gap-3">
             <button

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Check, Minus } from "lucide-react";
-import { Accent } from "@/components/shared/accent";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { COMPARISON } from "@/config/content";
 import { MEDIA } from "@/config/media";
@@ -8,19 +7,14 @@ import { MEDIA } from "@/config/media";
 export function Comparison() {
   const photo = MEDIA.gallery.proVacuum;
   return (
-    <section className="bg-white py-20 md:py-28">
+    <section className="bg-surface py-24 md:py-32">
       <div className="container-x grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-16">
         <div>
           <SectionHeading
-            eyebrow="Why go professional"
-            title={
-              <>
-                A wipe-down is not a <Accent>deep</Accent> clean
-              </>
-            }
+            title="A wipe-down isn't a deep clean."
             description="Home cleaning keeps fabric tidy. Professional extraction reaches the dirt, allergens and moisture that live underneath."
           />
-          <div className="group relative mt-10 hidden aspect-[4/3] overflow-hidden rounded-3xl lg:block">
+          <div className="group relative mt-10 hidden aspect-[4/3] overflow-hidden rounded-2xl lg:block">
             <Image
               src={photo.src}
               alt={photo.alt}
@@ -31,7 +25,7 @@ export function Comparison() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-3xl bg-surface ring-1 ring-slate-200/70">
+        <div className="overflow-hidden rounded-2xl bg-paper">
           <table className="w-full text-left text-sm sm:text-base">
             <caption className="sr-only">Home cleaning compared with a Fabric Doctor deep clean</caption>
             <thead>
@@ -42,7 +36,7 @@ export function Comparison() {
                 <th scope="col" className="p-4 font-semibold text-slate-700 sm:p-5">
                   At-home cleaning
                 </th>
-                <th scope="col" className="bg-brand-strong p-4 font-semibold text-white sm:p-5">
+                <th scope="col" className="bg-brand-strong p-4 font-bold text-white sm:p-5">
                   Fabric Doctor
                 </th>
               </tr>

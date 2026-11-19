@@ -40,8 +40,8 @@ export function ReviewsExperience({
     <>
       <section data-testid="review-form-section" className="bg-white pb-16 pt-4 md:pb-20">
         <div className="container-x">
-          <div className="mx-auto max-w-2xl rounded-3xl bg-surface p-6 shadow-soft ring-1 ring-slate-200/70 sm:p-8">
-            <h2 className="font-display text-3xl font-semibold tracking-tight text-ink">Leave a Review</h2>
+          <div className="mx-auto max-w-2xl rounded-2xl bg-surface p-6 ring-1 ring-ink/10 sm:p-10">
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink">Leave a Review</h2>
             <p className="mt-2 text-slate-600">No account needed — it takes less than a minute.</p>
             <ReviewForm services={services} onSubmitted={handleSubmitted} />
           </div>

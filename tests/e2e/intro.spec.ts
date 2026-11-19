@@ -13,8 +13,8 @@ test("intro plays on the first visit, then gets out of the way", async ({ page }
     const box = await intro.boundingBox();
     expect(box === null || box.y + box.height <= 1).toBe(true);
   }).toPass({ timeout: 6000 });
-  await page.getByRole("link", { name: "See Reviews & Moments" }).click();
-  await expect(page).toHaveURL(/\/reviews$/);
+  await page.getByRole("link", { name: "Explore All Moments & Leave a Review" }).click();
+  await expect(page).toHaveURL(/\/reviews#moments$/);
 });
 
 test("intro is skipped on later pages in the same visit", async ({ page }) => {

@@ -36,14 +36,14 @@ export default function CareGuidePage() {
               </>
             }
           />
-          <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {STAIN_FIRST_AID.map((tip, i) => (
               <li
                 key={tip.title}
-                className="rounded-3xl bg-surface p-7 ring-1 ring-slate-200/70 transition duration-300 hover:-translate-y-0.5 hover:shadow-soft"
+                className="border-t-2 border-ink pt-6"
               >
-                <span className="font-display text-4xl font-semibold text-brand-strong">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-4 font-display text-xl font-semibold text-ink">{tip.title}</h3>
+                <span className="font-display text-5xl font-extrabold leading-none text-sun">{i + 1}</span>
+                <h3 className="mt-4 font-display text-xl font-extrabold text-ink">{tip.title}</h3>
                 <p className="mt-2 leading-relaxed text-slate-600">{tip.text}</p>
               </li>
             ))}
@@ -65,7 +65,7 @@ export default function CareGuidePage() {
               }
               description="Most upholstery carries a cleaning code on a tag under the seat cushions or beneath the frame. Check it before any liquid touches the fabric."
             />
-            <div className="group relative mt-10 aspect-[4/3] overflow-hidden rounded-3xl">
+            <div className="group relative mt-10 aspect-[4/3] overflow-hidden rounded-2xl">
               <Image
                 src={MEDIA.gallery.fabricTexture.src}
                 alt={MEDIA.gallery.fabricTexture.alt}
@@ -77,8 +77,8 @@ export default function CareGuidePage() {
           </div>
           <dl className="grid gap-4 sm:grid-cols-2">
             {CARE_LABEL_CODES.map((c) => (
-              <div key={c.code} className="rounded-3xl bg-white/[0.04] p-7 ring-1 ring-white/10">
-                <dt className="font-display text-5xl font-semibold text-brand-bright">{c.code}</dt>
+              <div key={c.code} className="rounded-2xl bg-white/[0.05] p-7">
+                <dt className="font-display text-6xl font-extrabold text-sun">{c.code}</dt>
                 <dd className="mt-3 leading-relaxed text-slate-300">{c.meaning}</dd>
               </div>
             ))}
@@ -100,8 +100,8 @@ export default function CareGuidePage() {
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {STAIN_GUIDE.map((s) => (
-              <article key={s.stain} className="flex flex-col rounded-3xl bg-white p-7 shadow-soft ring-1 ring-slate-200/70">
-                <h3 className="font-display text-2xl font-semibold text-ink">{s.stain}</h3>
+              <article key={s.stain} className="flex flex-col rounded-2xl bg-paper p-7 ring-1 ring-ink/10">
+                <h3 className="font-display text-2xl font-extrabold text-ink">{s.stain}</h3>
                 <p className="mt-5 flex items-start gap-3 text-slate-700">
                   <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-strong" aria-hidden="true" />
                   <span>
@@ -138,7 +138,7 @@ export default function CareGuidePage() {
                 </>
               }
             />
-            <div className="group relative mt-10 aspect-[4/3] overflow-hidden rounded-3xl">
+            <div className="group relative mt-10 aspect-[4/3] overflow-hidden rounded-2xl">
               <Image
                 src={MEDIA.gallery.cushions.src}
                 alt={MEDIA.gallery.cushions.alt}
@@ -151,7 +151,7 @@ export default function CareGuidePage() {
           <ul className="grid gap-x-8 gap-y-8 sm:grid-cols-2">
             {ROUTINE_CARE.map((r) => (
               <li key={r.title} className="border-t-2 border-brand pt-5">
-                <h3 className="font-display text-xl font-semibold text-ink">{r.title}</h3>
+                <h3 className="font-display text-xl font-extrabold text-ink">{r.title}</h3>
                 <p className="mt-2 leading-relaxed text-slate-600">{r.text}</p>
               </li>
             ))}

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
 import dynamic from "next/dynamic";
 import type { Moment } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -19,20 +18,14 @@ function attribution(m: Moment) {
 
 export function MomentsGallery({ moments }: { moments: Moment[] }) {
   const [open, setOpen] = useState<number | null>(null);
-  const reduce = useReducedMotion();
 
   return (
     <>
       <ul className="columns-2 gap-3 md:columns-3 md:gap-4 lg:columns-4">
         {moments.map((m, i) => (
-          <motion.li
+          <li
             key={m.id}
             className="mb-3 break-inside-avoid md:mb-4"
-            // This page's dealt moment: the tiles resolve once as the gallery scrolls into view.
-            initial={reduce ? false : { opacity: 0, scale: 0.97 }}
-            whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: Math.min(i, 8) * 0.05 }}
           >
             <button
               type="button"
@@ -53,7 +46,7 @@ export function MomentsGallery({ moments }: { moments: Moment[] }) {
                 {attribution(m)}
               </span>
             </button>
-          </motion.li>
+          </li>
         ))}
       </ul>
 

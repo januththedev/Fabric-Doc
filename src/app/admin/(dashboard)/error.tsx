@@ -9,7 +9,7 @@ export default function AdminError({ error, reset }: { error: Error & { digest?:
 
   return (
     <div className="mx-auto max-w-lg rounded-3xl bg-white p-10 text-center shadow-soft ring-1 ring-slate-200/70">
-      <h1 className="font-display text-3xl font-semibold text-ink">Something went wrong</h1>
+      <h1 className="font-display text-3xl font-extrabold text-ink">Something went wrong</h1>
       <p className="mt-3 text-slate-600">
         The dashboard couldn&apos;t load. Check the database connection, then try again.
         {error.digest ? <span className="mt-2 block text-xs text-slate-600">Reference: {error.digest}</span> : null}

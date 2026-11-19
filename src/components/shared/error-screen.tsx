@@ -33,8 +33,8 @@ export function ErrorScreen({
       />
       <div className="container-x grid w-full items-center gap-12 lg:grid-cols-2">
         <div className="animate-rise">
-          <p className="font-display text-7xl font-semibold leading-none text-brand-bright sm:text-8xl">{code}</p>
-          <h1 className="mt-6 font-display text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">{title}</h1>
+          <p className="font-display text-7xl font-extrabold leading-none text-brand-bright sm:text-8xl">{code}</p>
+          <h1 className="mt-6 font-display text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">{title}</h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-slate-300">{message}</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">{actions}</div>
           <nav aria-label="Helpful links" className="mt-10">

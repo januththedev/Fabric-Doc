@@ -44,7 +44,7 @@ export function InquiriesTable({ inquiries }: { inquiries: Inquiry[] }) {
         >
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <p className="font-display text-lg font-semibold text-ink">{inquiry.name}</p>
+              <p className="font-display text-lg font-extrabold text-ink">{inquiry.name}</p>
               <p className="text-xs text-slate-600">{formatDate(inquiry.createdAt)}</p>
             </div>
             <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800">

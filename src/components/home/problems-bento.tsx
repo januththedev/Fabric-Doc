@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Accent } from "@/components/shared/accent";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { PROBLEMS } from "@/config/content";
 import { MEDIA } from "@/config/media";
@@ -15,29 +14,22 @@ const LAYOUT = [
 
 export function ProblemsBento() {
   return (
-    <section className="bg-white py-20 md:py-28">
+    <section className="bg-night py-24 md:py-32">
       <div className="container-x">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionHeading
-            eyebrow="What we remove"
-            title={
-              <>
-                What&apos;s <Accent>really</Accent> hiding in your fabrics
-              </>
-            }
-          />
-          <p className="max-w-sm text-slate-600 md:pb-2">
+          <SectionHeading tone="dark" title="What's really living in your sofa." />
+          <p className="max-w-sm text-lg leading-relaxed text-slate-300 md:pb-2">
             Vacuuming takes care of the surface. Everything below it needs a proper deep clean.
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-4 md:auto-rows-[15rem] md:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 gap-3 md:auto-rows-[15rem] md:grid-cols-4">
           {PROBLEMS.map((p, i) => {
             const img = MEDIA.gallery[p.image];
             return (
               <article
                 key={p.title}
-                className={cn("group relative isolate overflow-hidden rounded-3xl bg-ink", LAYOUT[i])}
+                className={cn("group relative isolate overflow-hidden rounded-2xl bg-ink", LAYOUT[i])}
               >
                 <Image
                   src={img.src}

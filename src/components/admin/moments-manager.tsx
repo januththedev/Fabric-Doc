@@ -154,7 +154,7 @@ export function MomentsManager({ moments }: { moments: Moment[] }) {
   return (
     <div className="space-y-8">
       <section className="rounded-2xl bg-white p-6 shadow-soft ring-1 ring-slate-200/70 sm:p-8">
-        <h2 className="font-display text-xl font-semibold text-ink">Add photos</h2>
+        <h2 className="font-display text-xl font-extrabold text-ink">Add photos</h2>
         <p className="mt-1 text-sm text-slate-600">Up to {MAX_BATCH} photos per batch, each with an optional caption.</p>
 
         <div
@@ -233,7 +233,7 @@ export function MomentsManager({ moments }: { moments: Moment[] }) {
       </section>
 
       <section>
-        <h2 className="font-display text-xl font-semibold text-ink">Moments gallery</h2>
+        <h2 className="font-display text-xl font-extrabold text-ink">Moments gallery</h2>
         {moments.length === 0 ? (
           <p className="mt-3 text-sm text-slate-600">No moments yet.</p>
         ) : (

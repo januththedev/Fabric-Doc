@@ -85,7 +85,7 @@ export function InquiryForm({ services }: { services: Pick<Service, "title">[] }
 
   if (confirmation) {
     return (
-      <div className="rounded-2xl bg-white p-6 shadow-soft ring-1 ring-slate-200/70 sm:p-8">
+      <div className="rounded-2xl bg-paper p-6 ring-1 ring-ink/10 sm:p-10">
         <span className="grid size-12 place-items-center rounded-full bg-mint text-brand-strong">
           <Check className="size-6" aria-hidden="true" />
         </span>
@@ -105,8 +105,8 @@ export function InquiryForm({ services }: { services: Pick<Service, "title">[] }
   }
 
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-soft ring-1 ring-slate-200/70 sm:p-8">
-      <h2 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+    <div className="rounded-2xl bg-paper p-6 ring-1 ring-ink/10 sm:p-10">
+      <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
         Quick Service Inquiry
       </h2>
 

@@ -15,11 +15,11 @@ function initials(name: string) {
 
 export function ReviewCard({ review }: { review: Review }) {
   return (
-    <article className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-soft ring-1 ring-slate-200/70 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-14px_rgb(15_23_42/0.28)]">
+    <article className="flex h-full flex-col rounded-2xl bg-paper p-6 ring-1 ring-ink/10 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-14px_rgb(15_23_42/0.28)]">
       <header className="flex items-center gap-3">
         <span
           aria-hidden="true"
-          className="grid size-11 shrink-0 place-items-center rounded-full bg-teal-50 text-sm font-semibold text-teal-800"
+          className="grid size-11 shrink-0 place-items-center rounded-full bg-sun text-sm font-bold text-night"
         >
           {initials(review.reviewerName)}
         </span>

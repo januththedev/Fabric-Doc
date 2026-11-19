@@ -21,7 +21,7 @@ export default async function ReviewsPage() {
     <>
       <section className="bg-white pb-10 pt-32 sm:pt-40">
         <div className="container-x">
-          <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+          <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
             Reviews &amp; Moments
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-slate-600">

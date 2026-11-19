@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, CheckCircle2, ScanSearch, ShieldCheck, Wind } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/whatsapp-icon";
 import { Accent } from "@/components/shared/accent";
 import { FaqSection } from "@/components/shared/faq-section";
@@ -28,7 +28,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: service.title, description: service.shortDesc };
 }
 
-const STEP_ICONS = [ScanSearch, ShieldCheck, Wind];
 
 export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
@@ -63,7 +62,7 @@ export default async function ServicePage({ params }: Props) {
             </Link>
           </nav>
           <h1
-            className="animate-slide mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl"
+            className="animate-slide mt-5 max-w-3xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl"
             style={{ animationDelay: "0.08s" }}
           >
             {service.title}
@@ -106,7 +105,7 @@ export default async function ServicePage({ params }: Props) {
             <p className="mt-6 text-lg leading-relaxed text-slate-600">{detail.intro}</p>
             {detail.goodFor.length > 0 ? (
               <div className="mt-8">
-                <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-brand-strong">Good for</h3>
+                <h3 className="font-display text-lg font-extrabold text-ink">Good for</h3>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {detail.goodFor.map((g) => (
                     <li key={g} className="rounded-full bg-teal-50 px-4 py-2 text-sm font-medium text-teal-900">
@@ -117,8 +116,8 @@ export default async function ServicePage({ params }: Props) {
               </div>
             ) : null}
           </div>
-          <div className="rounded-3xl bg-surface p-8 ring-1 ring-slate-200/70 sm:p-10">
-            <h2 className="font-display text-2xl font-semibold text-ink">What&apos;s included</h2>
+          <div className="rounded-2xl bg-paper p-8 ring-1 ring-ink/10 sm:p-10">
+            <h2 className="font-display text-2xl font-extrabold text-ink">What&apos;s included</h2>
             <ul className="mt-6 space-y-4">
               {included.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-slate-700">
@@ -140,7 +139,7 @@ export default async function ServicePage({ params }: Props) {
           {gallery.map((img, i) => (
             <div
               key={img.src}
-              className={`group relative overflow-hidden rounded-3xl bg-slate-200 aspect-[4/3] ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+              className={`group relative overflow-hidden rounded-2xl bg-slate-200 aspect-[4/3] ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
             >
               <Image
                 src={img.src}
@@ -168,17 +167,15 @@ export default async function ServicePage({ params }: Props) {
           />
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {PROCESS_STEPS.map((step, i) => {
-              const Icon = STEP_ICONS[i];
               return (
                 <li
                   key={step.number}
-                  className="rounded-3xl bg-white/[0.04] p-7 ring-1 ring-white/10 transition duration-300 hover:-translate-y-0.5 hover:bg-white/[0.07]"
+                  className="group border-t border-white/15 pt-6"
                 >
-                  <span className="grid size-12 place-items-center rounded-2xl bg-brand-bright/15 text-brand-bright">
-                    <Icon className="size-6" aria-hidden="true" />
+                  <span className="inline-block font-display text-7xl font-extrabold leading-none text-sun transition-transform duration-500 group-hover:-translate-y-1">
+                    {i + 1}
                   </span>
-                  <p className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-brand-bright">Step {step.number}</p>
-                  <h3 className="mt-2 font-display text-xl font-semibold text-white">{step.title}</h3>
+                  <h3 className="mt-5 font-display text-2xl font-extrabold leading-tight text-white">{step.title}</h3>
                   <p className="mt-2 leading-relaxed text-slate-300">{step.description}</p>
                 </li>
               );
@@ -199,9 +196,9 @@ export default async function ServicePage({ params }: Props) {
                 <li key={o.id}>
                   <Link
                     href={`/services/${o.slug}`}
-                    className="group flex h-full items-center justify-between gap-4 rounded-2xl bg-surface p-6 ring-1 ring-slate-200/70 transition duration-300 hover:-translate-y-0.5 hover:ring-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
+                    className="group flex h-full items-center justify-between gap-4 rounded-2xl bg-surface p-6 ring-1 ring-ink/10 transition duration-300 hover:-translate-y-0.5 hover:ring-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
                   >
-                    <span className="font-display text-lg font-semibold text-ink">{o.title}</span>
+                    <span className="font-display text-lg font-extrabold text-ink">{o.title}</span>
                     <ArrowRight
                       className="size-5 shrink-0 text-brand-strong transition-transform duration-300 group-hover:translate-x-1"
                       aria-hidden="true"

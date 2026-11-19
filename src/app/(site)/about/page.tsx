@@ -35,7 +35,7 @@ export default function AboutPage() {
           />
 
           <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-surface ring-1 ring-slate-200/70">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface">
               <Image
                 src={MEDIA.about.src}
                 alt={MEDIA.about.alt}
@@ -57,11 +57,9 @@ export default function AboutPage() {
                 deep clean fits around your day, not the other way round.
               </p>
 
-              <figure className="mt-8 rounded-3xl bg-surface p-6 ring-1 ring-slate-200/70 sm:p-8">
-                <figcaption className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-strong">
-                  Our promise
-                </figcaption>
-                <blockquote className="mt-3">
+              <figure className="mt-8 rounded-2xl bg-sun p-6 text-night sm:p-8">
+                <figcaption className="sr-only">Our promise</figcaption>
+                <blockquote>
                   <TaglineHighlight />
                 </blockquote>
               </figure>

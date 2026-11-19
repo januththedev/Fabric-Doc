@@ -3,10 +3,9 @@ import { expect, test } from "@playwright/test";
 test("landing page content", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("We Don't Just Clean — We Care For Your Health.");
-  await expect(page.getByText("★ 100% Recommended (47+ Reviews) · Always Open 24/7")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Deep cleaning for sofas, mattresses, chairs & carpets.");
+  await expect(page.getByText("100% recommend us")).toBeVisible();
   await expect(page.getByRole("link", { name: "Book on WhatsApp" })).toHaveAttribute("href", /^https:\/\/wa\.me\/94740594100/);
-  await expect(page.getByRole("link", { name: "See Reviews & Moments" })).toHaveAttribute("href", "/reviews");
 
   const services = page.locator("#services article");
   await expect(services).toHaveCount(4);
@@ -26,7 +25,7 @@ test("landing page content", async ({ page }) => {
 
   expect(await page.getByTestId("marquee-review").count()).toBeGreaterThanOrEqual(3);
   await expect(page.getByTestId("moments-strip").getByRole("img")).toHaveCount(4);
-  await expect(page.getByRole("link", { name: "Explore All Moments & Leave a Review →" })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "Explore All Moments & Leave a Review" })).toHaveAttribute(
     "href",
     "/reviews#moments",
   );

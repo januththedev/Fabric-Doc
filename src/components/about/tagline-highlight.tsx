@@ -4,8 +4,9 @@ import { Fragment, useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { BUSINESS_INFO } from "@/config/business";
 
-const UNLIT = "#64748b"; // still readable (4.7:1) before it lights up
-const LIT = "#0f766e";
+// Set on the orange promise card: unlit words stay readable (about 5:1), lit ones go full ink.
+const UNLIT = "#5c2a0e";
+const LIT = "#0b1120";
 
 function Word({
   word,
@@ -46,7 +47,7 @@ export function TaglineHighlight() {
 
   if (reduce) {
     return (
-      <p className="font-display text-2xl italic leading-snug text-brand-strong sm:text-3xl lg:text-4xl">
+      <p className="font-display text-2xl font-extrabold leading-snug text-night sm:text-3xl lg:text-4xl">
         {BUSINESS_INFO.tagline}
       </p>
     );
@@ -54,7 +55,7 @@ export function TaglineHighlight() {
 
   return (
     <div ref={ref}>
-      <p className="font-display text-2xl italic leading-snug sm:text-3xl lg:text-4xl">
+      <p className="font-display text-2xl font-extrabold leading-snug sm:text-3xl lg:text-4xl">
         {words.map((word, index) => (
           <Fragment key={`${word}-${index}`}>
             <Word word={word} progress={scrollYProgress} index={index} total={words.length} />

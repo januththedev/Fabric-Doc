@@ -10,7 +10,7 @@ export function MetricsBar({ items }: { items: readonly MetricItem[] }) {
           {items.map((item) => (
             <div key={item.label} className="flex flex-col-reverse items-center text-center">
               <dt className="mt-2 text-sm text-slate-300">{item.label}</dt>
-              <dd className="font-display text-4xl font-semibold tracking-tight text-teal-400 sm:text-5xl">
+              <dd className="font-display text-4xl font-extrabold tracking-tight text-sun sm:text-6xl">
                 {item.value}
               </dd>
             </div>

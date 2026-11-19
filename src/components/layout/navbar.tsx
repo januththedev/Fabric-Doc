@@ -16,8 +16,8 @@ const underline =
 
 export function Navbar() {
   const pathname = usePathname();
-  // Pages that open with a dark header: the bar floats transparent over it until the page scrolls.
-  const overDark = pathname === "/" || pathname === "/about" || pathname === "/contact";
+  // Every page now opens on a light ground, so the bar is never transparent over a dark header.
+  const overDark = false;
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {

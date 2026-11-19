@@ -49,7 +49,7 @@ export default async function AdminDashboardPage({
 
   return (
     <div>
-      <h1 className="font-display text-3xl font-semibold text-ink">Dashboard</h1>
+      <h1 className="font-display text-3xl font-extrabold text-ink">Dashboard</h1>
 
       <Tabs value={tab} className="mt-6">
         <TabsList className="h-auto w-full flex-wrap justify-start gap-1 rounded-full bg-white p-1 shadow-soft ring-1 ring-slate-200/70 sm:w-fit">

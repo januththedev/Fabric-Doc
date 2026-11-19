@@ -35,7 +35,7 @@ export function ServicesManager({ services }: { services: Service[] }) {
     <section aria-labelledby="services-heading">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 id="services-heading" className="font-display text-2xl font-semibold text-ink">
+          <h2 id="services-heading" className="font-display text-2xl font-extrabold text-ink">
             Services
           </h2>
           <p className="mt-1 text-sm text-slate-600">What visitors see on the website, in this order.</p>

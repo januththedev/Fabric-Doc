@@ -2,7 +2,8 @@ import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 type SectionHeadingProps = {
-  eyebrow: string;
+  /** Kept for call sites and as a reading aid in code; not rendered (headings speak for themselves). */
+  eyebrow?: string;
   title: ReactNode;
   description?: string;
   align?: "left" | "center";
@@ -13,7 +14,6 @@ type SectionHeadingProps = {
 };
 
 export function SectionHeading({
-  eyebrow,
   title,
   description,
   align = "left",
@@ -23,25 +23,23 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   const dark = tone === "dark";
   return (
-    <div className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
-      <p
-        className={cn(
-          "text-xs font-semibold uppercase tracking-[0.16em]",
-          dark ? "text-brand-bright" : "text-brand-strong",
-        )}
-      >
-        {eyebrow}
-      </p>
+    <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}>
       <Tag
         className={cn(
-          "mt-3 font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl",
+          "font-display text-4xl font-extrabold leading-[0.98] sm:text-5xl lg:text-6xl",
           dark ? "text-white" : "text-ink",
         )}
       >
         {title}
       </Tag>
       {description ? (
-        <p className={cn("mt-4 text-base leading-relaxed sm:text-lg", dark ? "text-slate-300" : "text-slate-600")}>
+        <p
+          className={cn(
+            "mt-5 max-w-xl text-base leading-relaxed sm:text-lg",
+            align === "center" && "mx-auto",
+            dark ? "text-slate-300" : "text-slate-600",
+          )}
+        >
           {description}
         </p>
       ) : null}
