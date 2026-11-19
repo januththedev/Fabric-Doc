@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Accent } from "@/components/shared/accent";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { FAQS } from "@/config/content";
 
@@ -13,33 +12,29 @@ export function FaqSection({ faqs = FAQS, eyebrow = "Questions" }: { faqs?: { q:
   };
 
   return (
-    <section id="faq" className="bg-surface py-20 md:py-28">
+    <section id="faq" className="bg-paper py-24 md:py-32">
       <div className="container-x grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <div>
           <SectionHeading
             eyebrow={eyebrow}
-            title={
-              <>
-                Good to <Accent>know</Accent>
-              </>
-            }
+            title="Questions people ask us."
             description="The questions we hear most. Anything else? Message us — we're always open."
           />
           <Link
             href="/contact"
-            className="mt-8 inline-flex h-12 items-center rounded-full border border-slate-300 bg-white px-6 font-semibold text-ink transition duration-200 hover:-translate-y-px hover:border-brand-strong hover:text-brand-strong active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
+            className="mt-8 inline-flex h-12 items-center rounded-full bg-ink px-6 font-bold text-white transition duration-200 hover:-translate-y-px hover:bg-brand-strong active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
           >
             Ask us a question
           </Link>
         </div>
 
-        <Accordion type="single" collapsible className="rounded-3xl bg-white px-6 shadow-soft ring-1 ring-slate-200/70 sm:px-8">
+        <Accordion type="single" collapsible className="border-t border-ink/10">
           {faqs.map((f, i) => (
-            <AccordionItem key={f.q} value={`q${i}`} className="border-slate-200">
-              <AccordionTrigger className="py-5 text-left font-display text-lg font-semibold text-ink hover:no-underline">
+            <AccordionItem key={f.q} value={`q${i}`} className="border-ink/10">
+              <AccordionTrigger className="py-6 text-left font-display text-xl font-bold text-ink hover:text-brand-strong hover:no-underline">
                 {f.q}
               </AccordionTrigger>
-              <AccordionContent className="pb-5 text-base leading-relaxed text-slate-600">{f.a}</AccordionContent>
+              <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-slate-600 sm:text-lg">{f.a}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

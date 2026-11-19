@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Audiences } from "@/components/home/audiences";
-import { BookingSteps } from "@/components/home/booking-steps";
 import { CareTeaser } from "@/components/home/care-teaser";
 import { Comparison } from "@/components/home/comparison";
 import { Hero } from "@/components/home/hero";
@@ -29,7 +28,6 @@ export default async function HomePage() {
       <ServicesShowcase services={services} />
       <Audiences />
       <ProcessTimeline />
-      <BookingSteps />
       <SocialProof reviews={reviews} moments={moments} />
       <Comparison />
       <FaqSection />

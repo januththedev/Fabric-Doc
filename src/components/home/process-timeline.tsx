@@ -1,59 +1,67 @@
-import { ScanSearch, ShieldCheck, Wind, type LucideIcon } from "lucide-react";
-import { Accent } from "@/components/shared/accent";
-import { SectionHeading } from "@/components/shared/section-heading";
+import { WhatsAppIcon } from "@/components/icons/whatsapp-icon";
 import { PROCESS_STEPS } from "@/config/business";
+import { BOOKING_STEPS } from "@/config/content";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
-const ICONS: LucideIcon[] = [ScanSearch, ShieldCheck, Wind];
+const GROUPS = [
+  {
+    label: "Booking",
+    steps: BOOKING_STEPS.slice(0, 3).map((s) => ({ title: s.title, text: s.text })),
+  },
+  {
+    label: "On the day, at your door",
+    steps: PROCESS_STEPS.map((s) => ({ title: s.title, text: s.description })),
+  },
+];
 
 /**
- * This page's scroll moment: the line draws through the three steps and each step lights up as it is reached.
- * Driven by CSS scroll timelines (see .fd-steps in globals.css), so it costs no JavaScript.
- * Browsers without scroll timelines, and reduced-motion visitors, see the finished state.
+ * How it works, start to finish: the three booking steps and the three cleaning steps as one numbered run.
+ * The numbers carry the order, so they stay.
  */
 export function ProcessTimeline() {
+  let n = 0;
   return (
-    <section className="bg-white py-20 md:py-28">
+    <section className="relative isolate overflow-hidden bg-brand-strong py-24 text-white md:py-32">
+      <div aria-hidden="true" className="absolute -right-40 -top-40 -z-10 size-[36rem] rounded-full bg-brand-bright/25 blur-3xl" />
       <div className="container-x">
-        <SectionHeading
-          eyebrow="How We Work"
-          title={
-            <>
-              Our <Accent>health-first</Accent> 3-step deep clean
-            </>
-          }
-          align="center"
-        />
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="max-w-3xl font-display text-4xl font-extrabold leading-[0.98] sm:text-5xl lg:text-6xl">
+            One message. Six steps. Fresh fabric.
+          </h2>
+          <a
+            href={buildWhatsAppUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-14 w-fit items-center gap-2.5 rounded-full bg-white px-7 text-base font-bold text-brand-strong transition duration-300 hover:-translate-y-0.5 hover:bg-sun hover:text-night active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-strong"
+          >
+            <WhatsAppIcon className="size-5" />
+            Start on WhatsApp
+          </a>
+        </div>
 
-        <div className="fd-steps relative mx-auto mt-14 max-w-5xl">
-          {/* Desktop line (horizontal) */}
-          <div aria-hidden="true" className="absolute left-[16.7%] right-[16.7%] top-7 hidden h-0.5 bg-slate-200 md:block">
-            <span className="fd-draw-x absolute inset-0 origin-left bg-brand-strong" />
-          </div>
-          {/* Mobile line (vertical) */}
-          <div aria-hidden="true" className="absolute bottom-7 left-7 top-7 w-0.5 -translate-x-1/2 bg-slate-200 md:hidden">
-            <span className="fd-draw-y absolute inset-0 origin-top bg-brand-strong" />
-          </div>
-
-          <ol className="relative grid gap-0 md:grid-cols-3 md:gap-8">
-            {PROCESS_STEPS.map((step, i) => {
-              const Icon = ICONS[i];
-              return (
-                <li key={step.number} className="relative flex gap-5 pb-12 last:pb-0 md:block md:pb-0 md:text-center">
-                  <span
-                    data-step={i + 1}
-                    className="fd-step-icon relative z-10 grid size-14 shrink-0 place-items-center rounded-full bg-brand-strong text-white ring-8 ring-white md:mx-auto"
-                  >
-                    <Icon className="size-6" aria-hidden="true" />
-                  </span>
-                  <div className="md:mt-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-strong">Step {step.number}</p>
-                    <h3 className="mt-2 font-display text-xl font-semibold leading-snug tracking-tight text-ink">{step.title}</h3>
-                    <p className="mt-3 max-w-xs leading-relaxed text-slate-600 md:mx-auto">{step.description}</p>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
+        <div className="mt-16 space-y-14">
+          {GROUPS.map((g) => (
+            <div key={g.label}>
+              <h3 className="flex items-center gap-4 text-sm font-bold uppercase tracking-[0.14em] text-teal-100">
+                {g.label}
+                <span aria-hidden="true" className="h-px flex-1 bg-white/20" />
+              </h3>
+              <ol className="mt-8 grid gap-10 md:grid-cols-3 md:gap-8">
+                {g.steps.map((s) => {
+                  n += 1;
+                  return (
+                    <li key={s.title} className="group">
+                      <span className="font-display text-7xl font-extrabold leading-none text-sun transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1 inline-block">
+                        {n}
+                      </span>
+                      <p className="mt-5 font-display text-2xl font-extrabold leading-tight">{s.title}</p>
+                      <p className="mt-3 max-w-sm leading-relaxed text-teal-50/85">{s.text}</p>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          ))}
         </div>
       </div>
     </section>

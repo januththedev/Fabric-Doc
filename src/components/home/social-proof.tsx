@@ -1,59 +1,70 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CountUp } from "@/components/home/count-up";
-import { ReviewsMarquee } from "@/components/home/reviews-marquee";
-import { Accent } from "@/components/shared/accent";
-import { SectionHeading } from "@/components/shared/section-heading";
+import { ArrowRight } from "lucide-react";
+import { StarRating } from "@/components/shared/star-rating";
 import { BUSINESS_INFO } from "@/config/business";
 import type { Moment, Review } from "@/lib/types";
 
+/** Reviews: the numbers are the headline, one review featured large, the rest in a quiet grid, then customer photos. */
 export function SocialProof({ reviews, moments }: { reviews: Review[]; moments: Moment[] }) {
   const { stats } = BUSINESS_INFO;
+  const [featured, ...rest] = reviews;
+  const others = rest.slice(0, 4);
   const strip = moments.slice(0, 4);
-  const figures = [
-    { value: stats.recommendationRate, label: "recommend us" },
-    { value: stats.reviewCount, label: "reviews on Facebook" },
-    { value: stats.followers, label: "Facebook community" },
-    { value: "24/7", label: "always open" },
-  ];
 
   return (
-    <section className="bg-surface py-20 md:py-28">
+    <section className="bg-paper py-24 md:py-32">
       <div className="container-x">
-        <SectionHeading
-          eyebrow="Customer love"
-          align="center"
-          className="mx-auto"
-          title={
-            <>
-              Trusted by families who <Accent>care</Accent> about clean
-            </>
-          }
-        />
+        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+          <h2 className="max-w-3xl font-display text-4xl font-extrabold leading-[0.98] text-ink sm:text-5xl lg:text-6xl">
+            {stats.recommendationRate} of our customers recommend us.
+          </h2>
+          <p className="max-w-sm text-lg leading-relaxed text-slate-600">
+            {stats.reviewCount} reviews on Facebook and a community of {stats.followers} people. A few of them, in their own words:
+          </p>
+        </div>
 
-        <dl className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-y-8 md:grid-cols-4">
-          {figures.map((f) => (
-            <div key={f.label} className="text-center">
-              <dt className="sr-only">{f.label}</dt>
-              <dd>
-                <CountUp
-                  value={f.value}
-                  className="font-display text-5xl font-semibold tracking-tight text-brand-strong sm:text-6xl"
-                />
-                <p className="mt-2 text-sm font-medium text-slate-600">{f.label}</p>
-              </dd>
+        {featured ? (
+          <div className="mt-14 grid gap-4 lg:grid-cols-[1.05fr_1fr]">
+            <figure data-testid="marquee-review" className="flex flex-col justify-between rounded-2xl bg-ink p-8 text-white sm:p-10">
+              <div>
+                <StarRating value={featured.rating} size="md" className="text-sun" />
+                <blockquote className="mt-6 font-display text-2xl font-bold leading-snug sm:text-3xl">
+                  &ldquo;{featured.comment}&rdquo;
+                </blockquote>
+              </div>
+              <figcaption className="mt-10 flex items-center gap-4 border-t border-white/10 pt-6">
+                <span className="grid size-11 place-items-center rounded-full bg-sun font-bold text-night">
+                  {featured.reviewerName.charAt(0)}
+                </span>
+                <span>
+                  <span className="block font-bold">{featured.reviewerName}</span>
+                  <span className="block text-sm text-slate-400">{featured.serviceType}</span>
+                </span>
+              </figcaption>
+            </figure>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {others.map((r) => (
+                <figure
+                  key={r.id}
+                  data-testid="marquee-review"
+                  className="flex flex-col rounded-2xl bg-surface p-6 transition duration-300 hover:-translate-y-0.5"
+                >
+                  <StarRating value={r.rating} size="sm" />
+                  <blockquote className="mt-4 line-clamp-5 flex-1 leading-relaxed text-slate-700">{r.comment}</blockquote>
+                  <figcaption className="mt-5 text-sm">
+                    <span className="font-bold text-ink">{r.reviewerName}</span>
+                    <span className="text-slate-500"> · {r.serviceType}</span>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
-          ))}
-        </dl>
-      </div>
+          </div>
+        ) : null}
 
-      <div className="mt-16">
-        <ReviewsMarquee reviews={reviews} />
-      </div>
-
-      <div className="container-x">
         {strip.length > 0 ? (
-          <div data-testid="moments-strip" className="mt-16 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+          <div data-testid="moments-strip" className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
             {strip.map((m, i) => (
               <Link
                 key={m.id}
@@ -62,25 +73,23 @@ export function SocialProof({ reviews, moments }: { reviews: Review[]; moments: 
               >
                 <Image
                   src={m.imageSrc}
-                unoptimized={m.imageSrc.startsWith("blob:")}
                   alt={m.caption ?? `Cleaning result photo ${i + 1} from Fabric Doctor`}
                   fill
                   sizes="(min-width: 768px) 25vw, 50vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
               </Link>
             ))}
           </div>
         ) : null}
 
-        <div className="mt-8 text-center">
-          <Link
-            href="/reviews#moments"
-            className="relative inline-block font-semibold text-brand-strong after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
-          >
-            Explore All Moments &amp; Leave a Review →
-          </Link>
-        </div>
+        <Link
+          href="/reviews#moments"
+          className="group mt-10 inline-flex items-center gap-2 text-lg font-bold text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright rounded-sm"
+        >
+          <span className="underline decoration-brand-bright decoration-2 underline-offset-[6px]">Explore All Moments &amp; Leave a Review</span>
+          <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+        </Link>
       </div>
     </section>
   );

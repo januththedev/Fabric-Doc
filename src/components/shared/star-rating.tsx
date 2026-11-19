@@ -10,7 +10,7 @@ export function StarRating({ value, size = "md", className }: { value: number; s
           aria-hidden="true"
           className={cn(
             size === "sm" ? "size-4" : "size-5",
-            n <= value ? "fill-amber-400 text-amber-400" : "fill-transparent text-slate-300",
+            n <= value ? "fill-sun text-sun" : "fill-transparent text-slate-300",
           )}
         />
       ))}

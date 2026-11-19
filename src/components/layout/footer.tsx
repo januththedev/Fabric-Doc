@@ -34,8 +34,7 @@ function DirLink({ href, children, external }: { href: string; children: React.R
 
 function ColumnLabel({ index, children }: { index: string; children: React.ReactNode }) {
   return (
-    <h2 className="flex items-baseline gap-2 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
-      <span className="font-display text-sm normal-case tracking-normal text-brand-bright">({index})</span>
+    <h2 className="text-sm font-bold text-white" data-index={index}>
       {children}
     </h2>
   );
@@ -58,15 +57,11 @@ export function Footer({ services }: { services: readonly Pick<Service, "title">
 
       {/* Row 1: the close */}
       <div className="container-x pt-24 sm:pt-32">
-        <p className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-brand-bright">
-          <span className="h-px w-10 bg-brand-bright/60" aria-hidden="true" />
-          Book a deep clean
-        </p>
-        <div className="mt-8 grid items-end gap-12 lg:grid-cols-[1fr_auto]">
-          <p className="font-display text-[clamp(2.75rem,7.4vw,7.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-white">
+        <div className="grid items-end gap-12 lg:grid-cols-[1fr_auto]">
+          <p className="font-display text-[clamp(2.75rem,7.4vw,7.5rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-white">
             Fresh fabrics,
             <br />
-            <em className="text-brand-bright">healthier</em> home.
+            <span className="text-brand-bright">healthier home.</span>
           </p>
 
           <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center lg:flex-col lg:items-end">
@@ -74,7 +69,7 @@ export function Footer({ services }: { services: readonly Pick<Service, "title">
               href={buildWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="fd-orb group relative grid size-40 shrink-0 place-items-center rounded-full bg-brand-bright text-night transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 sm:size-44"
+              className="fd-orb group relative grid size-40 shrink-0 place-items-center rounded-full bg-sun text-night transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 sm:size-44"
             >
               <span className="flex flex-col items-center gap-1.5 text-center text-sm font-semibold leading-tight">
                 <WhatsAppIcon className="size-7 transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110" />
@@ -85,7 +80,7 @@ export function Footer({ services }: { services: readonly Pick<Service, "title">
             </a>
             <a
               href={`tel:${BUSINESS_INFO.phoneRaw}`}
-              className="group inline-flex items-center gap-3 font-display text-3xl font-semibold tracking-tight text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright rounded-md sm:text-4xl"
+              className="group inline-flex items-center gap-3 font-display text-3xl font-extrabold tracking-tight text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright rounded-md sm:text-4xl"
             >
               <Phone className="size-6 text-brand-bright" aria-hidden="true" />
               <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-500 group-hover:bg-[length:100%_2px]">
@@ -99,7 +94,7 @@ export function Footer({ services }: { services: readonly Pick<Service, "title">
       {/* Row 2: the directory */}
       <div className="container-x mt-20 grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-2 lg:mt-28 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div className="max-w-xs">
-          <p className="font-display text-xl italic leading-snug text-white">{BUSINESS_INFO.tagline}</p>
+          <p className="font-display text-xl leading-snug text-white">{BUSINESS_INFO.tagline}</p>
           <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/5 px-3.5 py-1.5 text-sm text-slate-200 ring-1 ring-white/10">
             Always Open (24/7)
           </p>
