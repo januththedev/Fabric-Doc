@@ -92,3 +92,15 @@ export async function createReviewWithMoment(input: {
     return { review: mapReview(row), moment };
   });
 }
+
+// ---------- inquiries (Task 9) ----------
+
+export async function createInquiry(input: {
+  name: string;
+  phone: string;
+  serviceType: string;
+  city: string;
+  message: string;
+}): Promise<void> {
+  await getDb().insert(inquiries).values(input);
+}
