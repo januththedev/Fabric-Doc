@@ -1,9 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Phone } from "lucide-react";
+import { ArrowUp, Phone } from "lucide-react";
 import { BUSINESS_INFO } from "@/config/business";
 import { FacebookIcon } from "@/components/icons/facebook-icon";
 import { WhatsAppIcon } from "@/components/icons/whatsapp-icon";
-import { Logo } from "@/components/layout/logo";
 import { NAV_LINKS } from "@/components/layout/nav-links";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import type { Service } from "@/lib/types";
@@ -14,10 +14,27 @@ const linkClass =
 export function Footer({ services }: { services: readonly Pick<Service, "title">[] }) {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-ink text-slate-300">
-      <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative isolate overflow-hidden bg-ink text-slate-300">
+      {/* soft brand glow so the footer reads as part of the page, not a separate slab */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(48rem_22rem_at_15%_0%,rgb(20_184_166/0.14),transparent_70%),radial-gradient(40rem_20rem_at_100%_100%,rgb(15_118_110/0.16),transparent_70%)]"
+      />
+      <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1fr] lg:py-20">
         <div>
-          <Logo tone="light" />
+          <Link
+            href="/"
+            aria-label={`${BUSINESS_INFO.brandName} — home`}
+            className="inline-block rounded-xl transition-transform duration-300 hover:-rotate-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
+          >
+            <Image
+              src="/brand/logo-full.png"
+              alt={BUSINESS_INFO.brandName}
+              width={380}
+              height={486}
+              className="h-36 w-auto drop-shadow-[0_14px_30px_rgb(20_184_166/0.25)]"
+            />
+          </Link>
           <p className="mt-5 max-w-xs font-display text-lg italic leading-snug text-white">
             {BUSINESS_INFO.tagline}
           </p>
@@ -93,9 +110,18 @@ export function Footer({ services }: { services: readonly Pick<Service, "title">
       </div>
 
       <div className="border-t border-white/10">
-        <p className="container-x py-6 text-sm text-slate-400">
-          © {year} {BUSINESS_INFO.brandName} — {BUSINESS_INFO.legalSubtitle}
-        </p>
+        <div className="container-x flex flex-col gap-3 py-6 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {year} {BUSINESS_INFO.brandName} — {BUSINESS_INFO.legalSubtitle}
+          </p>
+          <a
+            href="#main"
+            className="inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1.5 text-slate-300 ring-1 ring-white/10 transition hover:-translate-y-px hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright sm:self-auto"
+          >
+            <ArrowUp className="size-3.5" aria-hidden="true" />
+            Back to top
+          </a>
+        </div>
       </div>
     </footer>
   );

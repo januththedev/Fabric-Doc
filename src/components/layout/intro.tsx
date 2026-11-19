@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react";
 import { BUSINESS_INFO } from "@/config/business";
 
 /**
@@ -33,9 +32,8 @@ const FLOOR_DUST = [8, 21, 33, 47, 58, 71, 86, 95];
 function Wordmark() {
   return (
     <>
-      <span className="fd-intro-mark">
-        <Sparkles className="size-7" strokeWidth={2.2} />
-      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element -- must paint with the first HTML, before any JS */}
+      <img className="fd-intro-mark" src="/brand/mascot.png" alt="" width={272} height={240} />
       <span className="fd-intro-name">{BUSINESS_INFO.brandName}</span>
     </>
   );
