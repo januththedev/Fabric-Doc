@@ -51,7 +51,7 @@ export function ProcessTimeline() {
                   n += 1;
                   return (
                     <li key={s.title} className="group">
-                      <span className="font-display text-7xl font-extrabold leading-none text-sun transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1 inline-block">
+                      <span className="font-display text-7xl font-extrabold leading-none text-sun transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 inline-block">
                         {n}
                       </span>
                       <p className="mt-5 font-display text-2xl font-extrabold leading-tight">{s.title}</p>
