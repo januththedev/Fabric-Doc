@@ -8,7 +8,6 @@ import { ProblemsBento } from "@/components/home/problems-bento";
 import { ProcessTimeline } from "@/components/home/process-timeline";
 import { ServicesShowcase } from "@/components/home/services-showcase";
 import { SocialProof } from "@/components/home/social-proof";
-import { CtaBanner } from "@/components/shared/cta-banner";
 import { FaqSection } from "@/components/shared/faq-section";
 import { getMoments, getReviews, getServices } from "@/lib/preview-data";
 
@@ -35,7 +34,6 @@ export default async function HomePage() {
       <Comparison />
       <FaqSection />
       <CareTeaser />
-      <CtaBanner />
     </>
   );
 }
