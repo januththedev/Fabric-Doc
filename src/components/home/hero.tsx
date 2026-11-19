@@ -1,10 +1,7 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
 import { WhatsAppIcon } from "@/components/icons/whatsapp-icon";
-import { Reveal } from "@/components/motion/reveal";
+import { TrustStrip } from "@/components/home/trust-strip";
 import { Accent } from "@/components/shared/accent";
 import { BUSINESS_INFO } from "@/config/business";
 import { MEDIA } from "@/config/media";
@@ -14,46 +11,40 @@ const btn =
   "inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-base font-semibold transition duration-200 hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright focus-visible:ring-offset-2 focus-visible:ring-offset-night";
 
 export function Hero() {
-  const reduce = useReducedMotion();
   const { stats } = BUSINESS_INFO;
 
   return (
     <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-night">
-      {/* Photo settles once on load. No scroll parallax. */}
-      <motion.div
-        className="absolute inset-0 -z-20"
-        initial={reduce ? false : { scale: 1.06 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.4, ease: "easeOut" }}
-      >
+      {/* Photo settles once on load (CSS, so it never waits for JavaScript). No scroll parallax. */}
+      <div className="absolute inset-0 -z-20 animate-settle">
         <Image src={MEDIA.hero.src} alt={MEDIA.hero.alt} fill priority sizes="100vw" className="object-cover" />
-      </motion.div>
+      </div>
       {/* Scrim: keeps the headline readable over the photo. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-night/85 via-night/50 to-night/95" />
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-night/65 via-night/10 to-transparent" />
 
-      <div className="container-x pb-20 pt-32">
+      <div className="container-x pb-10 pt-32">
         <div className="max-w-3xl">
-          <Reveal>
+          <div className="animate-rise">
             <p className="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white ring-1 ring-white/20 backdrop-blur">
               ★ {stats.recommendationRate} Recommended ({stats.reviewCount} Reviews) · Always Open 24/7
             </p>
-          </Reveal>
+          </div>
 
-          <Reveal delay={0.1}>
+          <div className="animate-rise" style={{ animationDelay: "0.1s" }}>
             <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
               We Don&apos;t Just Clean — We <Accent tone="dark">Care</Accent> For Your Health.
             </h1>
-          </Reveal>
+          </div>
 
-          <Reveal delay={0.2}>
+          <div className="animate-rise" style={{ animationDelay: "0.2s" }}>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
               Deep sanitization, stain extraction, and allergen removal for your{" "}
               <strong className="font-semibold text-white">Sofas, Mattresses, Chairs &amp; Carpets</strong>.
             </p>
-          </Reveal>
+          </div>
 
-          <Reveal delay={0.3}>
+          <div className="animate-rise" style={{ animationDelay: "0.3s" }}>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
                 href={buildWhatsAppUrl()}
@@ -68,7 +59,10 @@ export function Hero() {
                 See Reviews &amp; Moments
               </Link>
             </div>
-          </Reveal>
+          </div>
+        </div>
+        <div className="mt-14 lg:mt-20">
+          <TrustStrip />
         </div>
       </div>
     </section>

@@ -3,14 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import Lightbox from "yet-another-react-lightbox";
-import Captions from "yet-another-react-lightbox/plugins/captions";
-import "yet-another-react-lightbox/styles.css";
-import "yet-another-react-lightbox/plugins/captions.css";
+import dynamic from "next/dynamic";
 import type { Moment } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 // A deterministic mix of ratios gives the grid its masonry rhythm.
+// The full-screen viewer (and its styles) only downloads the first time someone opens a photo.
+const MomentsLightbox = dynamic(() => import("./moments-lightbox"), { ssr: false });
+
 const RATIOS = ["aspect-[4/5]", "aspect-square", "aspect-[4/3]", "aspect-[3/4]", "aspect-[5/4]"];
 
 function attribution(m: Moment) {
@@ -43,7 +43,7 @@ export function MomentsGallery({ moments }: { moments: Moment[] }) {
               <span className={cn("relative block w-full", RATIOS[i % RATIOS.length])}>
                 <Image
                   src={m.imageSrc}
-                  alt={m.caption ?? attribution(m)}
+                  alt={m.caption ?? `Cleaning result photo ${i + 1} from Fabric Doctor`}
                   fill
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -57,19 +57,18 @@ export function MomentsGallery({ moments }: { moments: Moment[] }) {
         ))}
       </ul>
 
-      <Lightbox
-        open={open !== null}
-        index={open ?? 0}
-        close={() => setOpen(null)}
-        plugins={[Captions]}
-        slides={moments.map((m) => ({
-          src: m.imageSrc,
-          alt: m.caption ?? attribution(m),
-          title: attribution(m),
-          description: m.caption ?? undefined,
-        }))}
-        controller={{ closeOnBackdropClick: true }}
-      />
+      {open !== null ? (
+        <MomentsLightbox
+          index={open}
+          close={() => setOpen(null)}
+          slides={moments.map((m, i) => ({
+            src: m.imageSrc,
+            alt: m.caption ?? `Cleaning result photo ${i + 1} from Fabric Doctor`,
+            title: attribution(m),
+            description: m.caption ?? undefined,
+          }))}
+        />
+      ) : null}
     </>
   );
 }

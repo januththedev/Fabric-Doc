@@ -292,7 +292,7 @@ function ServiceForm({ editing, onClose }: { editing: Exclude<Editing, null>; on
 
       <div>
         <p className="text-sm font-medium text-slate-800">Service photo (optional)</p>
-        <p className="mt-0.5 text-xs text-slate-500">Tip: use a landscape photo.</p>
+        <p className="mt-0.5 text-xs text-slate-600">Tip: use a landscape photo.</p>
         <div className="mt-2">
           <ImageDropzone
             file={photo}

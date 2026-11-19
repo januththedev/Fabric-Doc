@@ -1,23 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Quote } from "lucide-react";
+import { CountUp } from "@/components/home/count-up";
+import { ReviewsMarquee } from "@/components/home/reviews-marquee";
 import { Accent } from "@/components/shared/accent";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { StarRating } from "@/components/shared/star-rating";
 import { BUSINESS_INFO } from "@/config/business";
-import { pickFeaturedReviews } from "@/lib/reviews";
 import type { Moment, Review } from "@/lib/types";
 
 export function SocialProof({ reviews, moments }: { reviews: Review[]; moments: Moment[] }) {
-  const featured = pickFeaturedReviews(reviews, 3);
-  const strip = moments.slice(0, 4);
   const { stats } = BUSINESS_INFO;
+  const strip = moments.slice(0, 4);
+  const figures = [
+    { value: stats.recommendationRate, label: "recommend us" },
+    { value: stats.reviewCount, label: "reviews on Facebook" },
+    { value: stats.followers, label: "Facebook community" },
+    { value: "24/7", label: "always open" },
+  ];
 
   return (
     <section className="bg-surface py-20 md:py-28">
       <div className="container-x">
         <SectionHeading
-          eyebrow="Customer Love"
+          eyebrow="Customer love"
+          align="center"
+          className="mx-auto"
           title={
             <>
               Trusted by families who <Accent>care</Accent> about clean
@@ -25,40 +31,30 @@ export function SocialProof({ reviews, moments }: { reviews: Review[]; moments: 
           }
         />
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-14">
-          <div>
-            <p className="font-display text-7xl font-semibold leading-none tracking-tight text-brand-strong sm:text-8xl">
-              {stats.recommendationRate}
-            </p>
-            <p className="mt-3 text-lg font-medium text-ink">of customers recommend {BUSINESS_INFO.brandName}</p>
-            <StarRating value={5} className="mt-4" />
-            <p className="mt-3 text-sm text-slate-600">Based on {stats.reviewCount} reviews on Facebook</p>
-          </div>
-
-          {featured.length > 0 ? (
-            <div className="grid gap-5 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-              {featured.map((r) => (
-                <figure
-                  key={r.id}
-                  data-testid="featured-review"
-                  className="flex flex-col rounded-2xl bg-white p-6 shadow-soft ring-1 ring-slate-200/70 transition duration-300 hover:-translate-y-0.5"
-                >
-                  <Quote className="size-6 text-brand" aria-hidden="true" />
-                  <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-slate-700">{r.comment}</blockquote>
-                  <figcaption className="mt-5">
-                    <StarRating value={r.rating} size="sm" />
-                    <p className="mt-2 font-semibold text-ink">{r.reviewerName}</p>
-                    <p className="text-xs text-slate-500">{r.serviceType}</p>
-                  </figcaption>
-                </figure>
-              ))}
+        <dl className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-y-8 md:grid-cols-4">
+          {figures.map((f) => (
+            <div key={f.label} className="text-center">
+              <dt className="sr-only">{f.label}</dt>
+              <dd>
+                <CountUp
+                  value={f.value}
+                  className="font-display text-5xl font-semibold tracking-tight text-brand-strong sm:text-6xl"
+                />
+                <p className="mt-2 text-sm font-medium text-slate-600">{f.label}</p>
+              </dd>
             </div>
-          ) : null}
-        </div>
+          ))}
+        </dl>
+      </div>
 
+      <div className="mt-16">
+        <ReviewsMarquee reviews={reviews} />
+      </div>
+
+      <div className="container-x">
         {strip.length > 0 ? (
-          <div data-testid="moments-strip" className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-            {strip.map((m) => (
+          <div data-testid="moments-strip" className="mt-16 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+            {strip.map((m, i) => (
               <Link
                 key={m.id}
                 href="/reviews#moments"
@@ -66,7 +62,7 @@ export function SocialProof({ reviews, moments }: { reviews: Review[]; moments: 
               >
                 <Image
                   src={m.imageSrc}
-                  alt={m.caption ?? (m.reviewerName ? `Photo shared by ${m.reviewerName}` : "Fabric Doctor transformation")}
+                  alt={m.caption ?? `Cleaning result photo ${i + 1} from Fabric Doctor`}
                   fill
                   sizes="(min-width: 768px) 25vw, 50vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -76,7 +72,7 @@ export function SocialProof({ reviews, moments }: { reviews: Review[]; moments: 
           </div>
         ) : null}
 
-        <div className="mt-8">
+        <div className="mt-8 text-center">
           <Link
             href="/reviews#moments"
             className="relative inline-block font-semibold text-brand-strong after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"

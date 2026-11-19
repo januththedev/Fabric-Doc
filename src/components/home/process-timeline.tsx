@@ -17,7 +17,6 @@ function Step({ index, progress }: { index: number; progress: MotionValue<number
   const lit = useTransform(progress, [start, start + 0.2], [0, 1]);
   const background = useTransform(lit, [0, 1], ["#e2e8f0", "#0f766e"]);
   const color = useTransform(lit, [0, 1], ["#64748b", "#ffffff"]);
-  const textOpacity = useTransform(lit, [0, 1], [0.5, 1]);
 
   return (
     <li className="relative flex gap-5 pb-12 last:pb-0 md:block md:pb-0 md:text-center">
@@ -27,13 +26,11 @@ function Step({ index, progress }: { index: number; progress: MotionValue<number
       >
         <Icon className="size-6" aria-hidden="true" />
       </motion.span>
-      <motion.div style={{ opacity: textOpacity }} className="md:mt-6">
-        <p aria-hidden="true" className="font-display text-5xl font-semibold leading-none text-brand/15">
-          {step.number}
-        </p>
+      <div className="md:mt-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-strong">Step {step.number}</p>
         <h3 className="mt-2 font-display text-xl font-semibold leading-snug tracking-tight text-ink">{step.title}</h3>
         <p className="mt-3 max-w-xs leading-relaxed text-slate-600 md:mx-auto">{step.description}</p>
-      </motion.div>
+      </div>
     </li>
   );
 }

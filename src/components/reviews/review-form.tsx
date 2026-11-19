@@ -162,7 +162,7 @@ export function ReviewForm({
         <Textarea id="comment" rows={5} maxLength={1000} className="mt-1.5" aria-invalid={Boolean(errors.comment)} {...register("comment")} />
         <div className="mt-1.5 flex justify-between gap-4">
           {errors.comment ? <p className="text-sm text-red-700">{errors.comment.message}</p> : <span />}
-          <p className="text-xs text-slate-500">{comment.length}/1000</p>
+          <p className="text-xs text-slate-600">{comment.length}/1000</p>
         </div>
       </div>
 

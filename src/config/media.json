@@ -48,5 +48,55 @@
       "src": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80",
       "alt": "Yellow fabric armchair with a fresh, clean finish"
     }
-  ]
+  ],
+  "gallery": {
+    "sofaVacuum": {
+      "src": "https://images.pexels.com/photos/4401538/pexels-photo-4401538.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "alt": "Upholstery specialist vacuuming the seat of a green fabric armchair"
+    },
+    "carpetSanitize": {
+      "src": "https://images.pexels.com/photos/4176300/pexels-photo-4176300.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "alt": "Cleaner in protective clothing deep-cleaning a white rug in a bright living room"
+    },
+    "proVacuum": {
+      "src": "https://images.pexels.com/photos/6195951/pexels-photo-6195951.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "alt": "Technician in a protective suit vacuuming beside a grey sofa"
+    },
+    "rugVacuum": {
+      "src": "https://images.pexels.com/photos/4107284/pexels-photo-4107284.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "alt": "Vacuum head lifting dust from a patterned area rug"
+    },
+    "rugWash": {
+      "src": "https://images.pexels.com/photos/9462316/pexels-photo-9462316.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "alt": "Wet-extraction cleaner working across a soft white carpet"
+    },
+    "familyDog": {
+      "src": "https://images.pexels.com/photos/5998706/pexels-photo-5998706.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "alt": "Family with two children and their dog relaxing together on a sofa"
+    },
+    "kidsDog": {
+      "src": "https://images.pexels.com/photos/5951991/pexels-photo-5951991.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "alt": "Two children cuddling a puppy on a beige fabric sofa"
+    },
+    "familyPug": {
+      "src": "https://images.pexels.com/photos/5099796/pexels-photo-5099796.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "alt": "Parent and child sitting on a grey couch with their pug"
+    },
+    "coffeeSpill": {
+      "src": "https://images.pexels.com/photos/36136791/pexels-photo-36136791.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "alt": "Coffee spilled from a cup onto a light fabric surface"
+    },
+    "cushions": {
+      "src": "https://images.pexels.com/photos/11673765/pexels-photo-11673765.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "alt": "Patterned and mustard cushions on a dark fabric sofa"
+    },
+    "fabricTexture": {
+      "src": "https://images.pexels.com/photos/30399215/pexels-photo-30399215.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "alt": "Close-up of soft green fabric texture"
+    },
+    "bedMaking": {
+      "src": "https://images.pexels.com/photos/9462320/pexels-photo-9462320.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "alt": "Fresh white sheets being smoothed over a clean mattress"
+    }
+  }
 }

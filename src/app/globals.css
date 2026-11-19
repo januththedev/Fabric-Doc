@@ -169,6 +169,53 @@
   h2,
   h3 {
     font-family: var(--font-display);
-    font-variation-settings: "SOFT" 50;
   }
+}
+
+/* ===== Entrance animations in pure CSS: they play as soon as the page paints, before any JavaScript loads ===== */
+@keyframes fd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fd-settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@utility animate-rise {
+  animation: fd-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@utility animate-settle {
+  animation: fd-settle 1.4s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-settle {
+    animation: none;
+  }
+}
+
+/* ===== Review marquee: each row holds two identical copies and slides by exactly one copy ===== */
+@keyframes fd-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@utility animate-marquee {
+  animation: fd-marquee 60s linear infinite;
+}
+@utility animate-marquee-reverse {
+  animation: fd-marquee 70s linear infinite reverse;
 }

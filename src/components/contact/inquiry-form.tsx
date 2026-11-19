@@ -179,7 +179,7 @@ export function InquiryForm({ services }: { services: Pick<Service, "title">[] }
         <div>
           <div className="flex items-baseline justify-between gap-4">
             <Label htmlFor="inquiry-message">Message / Stain Details</Label>
-            <span className="text-xs tabular-nums text-slate-500">{messageLength}/1000</span>
+            <span className="text-xs tabular-nums text-slate-600">{messageLength}/1000</span>
           </div>
           <Textarea
             id="inquiry-message"

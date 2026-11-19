@@ -20,7 +20,7 @@ const rowClass =
   "mb-3 block rounded-2xl border border-slate-200 bg-white p-4 md:mb-0 md:table-row md:rounded-none md:border-0 md:border-b md:p-0";
 
 function MobileLabel({ children }: { children: string }) {
-  return <span className="text-xs font-medium tracking-wide text-slate-500 uppercase md:hidden">{children}</span>;
+  return <span className="text-xs font-medium tracking-wide text-slate-600 uppercase md:hidden">{children}</span>;
 }
 
 export function ReviewsTable({ reviews }: { reviews: Review[] }) {
@@ -133,7 +133,7 @@ export function ReviewsTable({ reviews }: { reviews: Review[] }) {
                         <button
                           type="button"
                           aria-label={`Delete review by ${review.reviewerName}`}
-                          className="mt-1 inline-grid size-11 place-items-center rounded-full border border-slate-200 text-slate-500 transition hover:border-red-300 hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright md:mt-0"
+                          className="mt-1 inline-grid size-11 place-items-center rounded-full border border-slate-200 text-slate-600 transition hover:border-red-300 hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright md:mt-0"
                         >
                           <Trash2 className="size-4" aria-hidden="true" />
                         </button>

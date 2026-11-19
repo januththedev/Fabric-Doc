@@ -60,7 +60,7 @@ export function ImageDropzone({ previewUrl, onSelect, onRemove, onReject, disabl
       <input {...getInputProps({ "aria-label": label })} />
       <ImagePlus className="size-7 text-brand-strong" aria-hidden="true" />
       <p className="text-sm font-medium text-slate-700">Drag a photo here, or tap to take or choose one</p>
-      <p className="text-xs text-slate-500">JPG, PNG, WebP or HEIC</p>
+      <p className="text-xs text-slate-600">JPG, PNG, WebP or HEIC</p>
     </div>
   );
 }

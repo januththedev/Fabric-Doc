@@ -5,9 +5,11 @@ import { BUSINESS_INFO } from "@/config/business";
 import { MEDIA } from "@/config/media";
 import "./globals.css";
 
+// Only the two styles the design uses (semibold + italic for the accent word): much smaller than the full variable font.
 const fraunces = Fraunces({
   subsets: ["latin"],
-  axes: ["opsz", "SOFT"],
+  weight: ["600"],
+  style: ["normal", "italic"],
   variable: "--font-fraunces",
   display: "swap",
 });

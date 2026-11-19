@@ -45,7 +45,7 @@ export function InquiriesTable({ inquiries }: { inquiries: Inquiry[] }) {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="font-display text-lg font-semibold text-ink">{inquiry.name}</p>
-              <p className="text-xs text-slate-500">{formatDate(inquiry.createdAt)}</p>
+              <p className="text-xs text-slate-600">{formatDate(inquiry.createdAt)}</p>
             </div>
             <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800">
               {inquiry.serviceType}
@@ -54,7 +54,7 @@ export function InquiriesTable({ inquiries }: { inquiries: Inquiry[] }) {
 
           <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
             <div className="flex items-center gap-2">
-              <dt className="text-slate-500">Phone</dt>
+              <dt className="text-slate-600">Phone</dt>
               <dd>
                 <a
                   href={`tel:${inquiry.phone}`}
@@ -66,7 +66,7 @@ export function InquiriesTable({ inquiries }: { inquiries: Inquiry[] }) {
               </dd>
             </div>
             <div className="flex items-center gap-2">
-              <dt className="text-slate-500">City</dt>
+              <dt className="text-slate-600">City</dt>
               <dd className="font-medium text-slate-700">{inquiry.city}</dd>
             </div>
           </dl>
@@ -90,7 +90,7 @@ export function InquiriesTable({ inquiries }: { inquiries: Inquiry[] }) {
                 <button
                   type="button"
                   aria-label={`Delete inquiry from ${inquiry.name}`}
-                  className="inline-grid size-11 place-items-center rounded-full border border-slate-200 text-slate-500 transition hover:border-red-300 hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
+                  className="inline-grid size-11 place-items-center rounded-full border border-slate-200 text-slate-600 transition hover:border-red-300 hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
                 >
                   <Trash2 className="size-4" aria-hidden="true" />
                 </button>

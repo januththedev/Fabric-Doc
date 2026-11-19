@@ -73,14 +73,16 @@ export function ServicesShowcase({ services }: { services: readonly Service[] })
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 pt-6">
                   <a
                     href={buildWhatsAppUrl(buildServiceMessage(s.title))}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative mt-auto inline-block w-fit pt-6 font-semibold text-brand-strong after:absolute after:inset-x-0 after:bottom-[-2px] after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
+                    className="relative inline-block w-fit font-semibold text-brand-strong after:absolute after:inset-x-0 after:bottom-[-2px] after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
                   >
                     Book This Service →<span className="sr-only"> ({s.title})</span>
                   </a>
+                  </div>
                 </div>
               </article>
             ))}

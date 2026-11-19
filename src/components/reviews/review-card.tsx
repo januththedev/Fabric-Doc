@@ -25,7 +25,7 @@ export function ReviewCard({ review }: { review: Review }) {
         </span>
         <div className="min-w-0">
           <p className="truncate font-semibold text-ink">{review.reviewerName}</p>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-600">
             <RelativeTime iso={review.createdAt} />
           </p>
         </div>

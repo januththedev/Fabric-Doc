@@ -8,7 +8,7 @@ const cardClass =
   "group flex h-full items-start gap-4 rounded-2xl bg-white p-6 shadow-soft ring-1 ring-slate-200/70 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-14px_rgb(15_23_42/0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright focus-visible:ring-offset-2";
 const iconTileClass =
   "grid size-11 shrink-0 place-items-center rounded-xl bg-mint text-brand-strong transition-colors duration-300 group-hover:bg-brand-strong group-hover:text-white";
-const labelClass = "text-xs font-semibold uppercase tracking-[0.16em] text-slate-500";
+const labelClass = "text-xs font-semibold uppercase tracking-[0.16em] text-slate-600";
 const valueClass = "mt-1 text-base font-semibold text-ink";
 
 export function ContactCards() {

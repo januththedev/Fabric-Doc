@@ -24,7 +24,7 @@ test("landing page content", async ({ page }) => {
     await expect(page.getByText(title)).toBeVisible();
   }
 
-  await expect(page.getByTestId("featured-review")).toHaveCount(3);
+  expect(await page.getByTestId("marquee-review").count()).toBeGreaterThanOrEqual(3);
   await expect(page.getByTestId("moments-strip").getByRole("img")).toHaveCount(4);
   await expect(page.getByRole("link", { name: "Explore All Moments & Leave a Review →" })).toHaveAttribute(
     "href",

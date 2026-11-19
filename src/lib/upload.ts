@@ -1,5 +1,3 @@
-import imageCompression from "browser-image-compression";
-import { upload } from "@vercel/blob/client";
 import { MAX_RAW_IMAGE_BYTES, MAX_UPLOAD_BYTES } from "@/config/constants";
 
 export type PrepareResult =
@@ -27,6 +25,8 @@ export async function prepareImageForUpload(file: File): Promise<PrepareResult> 
 
   let compressed: File;
   try {
+    // Loaded on demand: most visitors never add a photo, so they never download the compressor.
+    const { default: imageCompression } = await import("browser-image-compression");
     compressed = await imageCompression(file, {
       maxSizeMB: 1,
       maxWidthOrHeight: 2048,
@@ -47,6 +47,7 @@ export async function prepareImageForUpload(file: File): Promise<PrepareResult> 
 /** Uploads straight from the browser to Vercel Blob. `/api/upload` authorises each upload first. */
 export async function uploadImage(file: File, folder: "reviews" | "admin"): Promise<{ url: string }> {
   const pathname = `${folder}/${crypto.randomUUID()}.jpg`;
+  const { upload } = await import("@vercel/blob/client");
   const blob = await upload(pathname, file, {
     access: "public",
     handleUploadUrl: "/api/upload",

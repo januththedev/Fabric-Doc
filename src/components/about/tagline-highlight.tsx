@@ -4,7 +4,7 @@ import { Fragment, useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { BUSINESS_INFO } from "@/config/business";
 
-const UNLIT = "#94a3b8";
+const UNLIT = "#64748b"; // still readable (4.7:1) before it lights up
 const LIT = "#0f766e";
 
 function Word({
@@ -20,11 +20,10 @@ function Word({
 }) {
   const start = index / total;
   const end = (index + 1) / total;
-  const opacity = useTransform(progress, [start, end], [0.25, 1]);
   const color = useTransform(progress, [start, end], [UNLIT, LIT]);
 
   return (
-    <motion.span style={{ opacity, color }}>
+    <motion.span style={{ color }}>
       {word}
     </motion.span>
   );

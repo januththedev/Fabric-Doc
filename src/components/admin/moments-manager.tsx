@@ -168,7 +168,7 @@ export function MomentsManager({ moments }: { moments: Moment[] }) {
           <input {...getInputProps({ "aria-label": "Add photos" })} />
           <ImagePlus className="size-7 text-brand-strong" aria-hidden="true" />
           <p className="text-sm font-medium text-slate-700">Drag photos here, or tap to take or choose them</p>
-          <p className="text-xs text-slate-500">JPG, PNG, WebP or HEIC · max {MAX_BATCH} at a time</p>
+          <p className="text-xs text-slate-600">JPG, PNG, WebP or HEIC · max {MAX_BATCH} at a time</p>
         </div>
 
         {drafts.length > 0 ? (
@@ -202,7 +202,7 @@ export function MomentsManager({ moments }: { moments: Moment[] }) {
                   />
                 </div>
                 <p
-                  className={cn("mt-1.5 text-xs", draft.status === "error" ? "text-red-700" : "text-slate-500")}
+                  className={cn("mt-1.5 text-xs", draft.status === "error" ? "text-red-700" : "text-slate-600")}
                   aria-live="polite"
                 >
                   {draft.status === "ready" ? "Ready" : null}
@@ -257,7 +257,7 @@ export function MomentsManager({ moments }: { moments: Moment[] }) {
                       <button
                         type="button"
                         aria-label="Delete photo"
-                        className="inline-grid size-11 place-items-center rounded-full border border-slate-200 text-slate-500 transition hover:border-red-300 hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
+                        className="inline-grid size-11 place-items-center rounded-full border border-slate-200 text-slate-600 transition hover:border-red-300 hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright"
                       >
                         <Trash2 className="size-4" aria-hidden="true" />
                       </button>
