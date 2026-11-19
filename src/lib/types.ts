@@ -8,7 +8,7 @@ export type Service = {
   sortOrder: number;
   isActive: boolean;
 };
-// serviceType on Review and Inquiry is the service TITLE as plain text (a snapshot), not an id.
+// serviceType on Review is the service TITLE as plain text (a snapshot), not an id.
 export type Review = {
   id: string;
   reviewerName: string;
@@ -27,13 +27,3 @@ export type Moment = {
   reviewId: string | null;
   createdAt: string;
 };
-export type Inquiry = {
-  id: string;
-  name: string;
-  phone: string;
-  serviceType: string;
-  city: string;
-  message: string;
-  createdAt: string;
-};
-export type ActionResult<T = undefined> = { ok: true; data: T } | { ok: false; error: string };
