@@ -6,12 +6,15 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 const buttonClass =
   "inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition duration-300 hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-strong";
 
-/** Closing call to action. Reused on the home page and the About page. */
+/**
+ * Closing call to action, always the last section before the footer.
+ * The section background turns footer-dark halfway down, so the card straddles the seam and joins the two.
+ */
 export function CtaBanner() {
   return (
-    <section className="bg-white py-20 md:py-28">
+    <section className="bg-[linear-gradient(to_bottom,#fff_0,#fff_50%,var(--color-ink)_50%)] pt-6 md:pt-10">
       <div className="container-x">
-        <div className="rounded-3xl bg-gradient-to-br from-brand-strong to-night p-8 sm:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:p-16">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-strong via-teal-800 to-[#0b3f3c] p-8 shadow-[0_30px_80px_-30px_rgb(15_118_110/0.55)] ring-1 ring-white/10 sm:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:p-16">
           <div className="max-w-2xl">
             <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               Fresh, healthy fabrics are one message away.

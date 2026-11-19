@@ -286,12 +286,10 @@ html[data-intro="skip"] .fd-intro {
   animation: fd-intro-reveal 0.86s linear 0.36s both;
 }
 .fd-intro-mark {
-  display: grid;
-  place-items: center;
-  width: 3.5rem;
-  height: 3.5rem;
+  display: block;
+  height: clamp(3.75rem, 11vw, 6rem);
+  width: auto;
   flex: none;
-  border-radius: 1.1rem;
 }
 .fd-intro-name {
   font-family: var(--font-display);
@@ -303,19 +301,13 @@ html[data-intro="skip"] .fd-intro {
 }
 /* Before: dull and dusty. */
 .fd-intro-dusty .fd-intro-mark {
-  background: #334155;
-  color: #64748b;
+  filter: grayscale(1) brightness(0.45) blur(0.6px);
 }
 .fd-intro-dusty .fd-intro-name {
   color: #475569;
   filter: blur(0.6px);
 }
 /* After: crisp. */
-.fd-intro-cleaned .fd-intro-mark {
-  background: var(--color-brand-strong);
-  color: #fff;
-  box-shadow: 0 16px 44px -10px rgb(20 184 166 / 0.7);
-}
 .fd-intro-cleaned .fd-intro-name {
   color: #fff;
 }
