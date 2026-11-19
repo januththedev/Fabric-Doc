@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test.use({ contextOptions: { reducedMotion: "no-preference" } });
 
 test("intro plays on the first visit, then gets out of the way", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/", { waitUntil: "commit" });
   const intro = page.locator(".fd-intro");
   await expect(intro).toBeVisible();
   await expect(intro).toHaveAttribute("aria-hidden", "true");

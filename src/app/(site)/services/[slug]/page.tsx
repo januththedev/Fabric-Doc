@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2, ScanSearch, ShieldCheck, Wind } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/whatsapp-icon";
 import { Accent } from "@/components/shared/accent";
-import { CtaBanner } from "@/components/shared/cta-banner";
 import { FaqSection } from "@/components/shared/faq-section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { PROCESS_STEPS } from "@/config/business";
@@ -214,8 +213,6 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </section>
       ) : null}
-
-      <CtaBanner />
     </>
   );
 }

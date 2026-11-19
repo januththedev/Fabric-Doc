@@ -6,7 +6,6 @@ import { MetricsBar, type MetricItem } from "@/components/about/metrics-bar";
 import { StandardsSection } from "@/components/about/standards-section";
 import { TaglineHighlight } from "@/components/about/tagline-highlight";
 import { Accent } from "@/components/shared/accent";
-import { CtaBanner } from "@/components/shared/cta-banner";
 import { PageHero } from "@/components/shared/page-hero";
 import { SectionHeading } from "@/components/shared/section-heading";
 
@@ -74,7 +73,6 @@ export default function AboutPage() {
       <HealthSection />
       <MetricsBar items={METRICS} />
       <StandardsSection />
-      <CtaBanner />
     </>
   );
 }

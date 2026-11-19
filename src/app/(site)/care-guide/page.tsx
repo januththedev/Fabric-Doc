@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { AlertTriangle, CheckCircle2, XCircle } from "lucide-react";
 import { Accent } from "@/components/shared/accent";
-import { CtaBanner } from "@/components/shared/cta-banner";
 import { PageHero } from "@/components/shared/page-hero";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { CARE_LABEL_CODES, ROUTINE_CARE, STAIN_FIRST_AID, STAIN_GUIDE } from "@/config/content";
@@ -159,8 +158,6 @@ export default function CareGuidePage() {
           </ul>
         </div>
       </section>
-
-      <CtaBanner />
     </>
   );
 }

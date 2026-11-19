@@ -447,6 +447,89 @@ html[data-intro="skip"] .fd-intro {
   }
 }
 
+/* ===================================================================================
+   Footer: the name set across the full width; its letters rise as the footer scrolls in.
+   =================================================================================== */
+.fd-word-wrap {
+  overflow: hidden;
+}
+.fd-word {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15.3vw;
+  line-height: 0.82;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  transform: translateY(7%);
+  user-select: none;
+}
+.fd-word-letter {
+  display: inline-block;
+  padding-top: 0.08em;
+  background: linear-gradient(180deg, #99f6e4 0%, #2dd4bf 35%, #0f766e 80%, rgb(15 118 110 / 0.4) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.fd-orb::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 9999px;
+  border: 1px solid rgb(45 212 191 / 0.45);
+  animation: fd-orb-ring 2.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  pointer-events: none;
+}
+@keyframes fd-orb-ring {
+  from {
+    transform: scale(0.92);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fd-orb::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .fd-word-wrap {
+      view-timeline-name: --fd-word;
+    }
+    .fd-word-letter {
+      animation: fd-letter-up linear both;
+      animation-timeline: --fd-word;
+      animation-range: entry calc(var(--i) * 3.5%) entry calc(52% + var(--i) * 3.6%);
+    }
+    .fd-word-mascot {
+      animation: fd-mascot-peek linear both;
+      animation-timeline: --fd-word;
+      animation-range: entry 45% entry 100%;
+    }
+  }
+}
+@keyframes fd-letter-up {
+  from {
+    transform: translateY(110%) rotate(6deg);
+  }
+}
+@keyframes fd-mascot-peek {
+  from {
+    transform: translateY(70%) rotate(10deg);
+    opacity: 0;
+  }
+}
+
 /* ===== Error-page illustration ===== */
 .fd-vac {
   animation: fd-vac-move 3.2s ease-in-out infinite;
