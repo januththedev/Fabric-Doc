@@ -210,3 +210,45 @@ export async function setServiceActiveRow(id: string, isActive: boolean): Promis
   const rows = await getDb().update(services).set({ isActive }).where(eq(services.id, id)).returning({ id: services.id });
   return rows.length > 0;
 }
+
+// ---------- admin (Task 11) ----------
+
+/** Deletes a review; its Moment cascades. Returns the review's photo (to delete from Blob) or null when it no longer exists. */
+export async function deleteReviewById(id: string): Promise<{ imageUrl: string | null } | null> {
+  const [row] = await getDb().delete(reviews).where(eq(reviews.id, id)).returning({ imageUrl: reviews.imageUrl });
+  return row ?? null;
+}
+
+/** Deletes a Moment. When it came from a review, the review keeps its text but loses its photo. */
+export async function deleteMomentById(id: string): Promise<{ imageUrl: string | null } | null> {
+  return getDb().transaction(async (tx) => {
+    const [moment] = await tx
+      .select({ imageUrl: moments.imageUrl, reviewId: moments.reviewId })
+      .from(moments)
+      .where(eq(moments.id, id));
+    if (!moment) return null;
+
+    if (moment.reviewId) {
+      await tx.update(reviews).set({ imageUrl: null }).where(eq(reviews.id, moment.reviewId));
+    }
+    await tx.delete(moments).where(eq(moments.id, id));
+    return { imageUrl: moment.imageUrl };
+  });
+}
+
+/** Admin uploads are the only way a Moment can be created without a review. */
+export async function insertAdminMoments(
+  items: { imageUrl: string; caption: string | null }[],
+): Promise<Moment[]> {
+  if (items.length === 0) return [];
+  const rows = await getDb()
+    .insert(moments)
+    .values(items.map((item) => ({ imageUrl: item.imageUrl, caption: item.caption, sourceType: "admin" })))
+    .returning();
+  return rows.map(mapMoment);
+}
+
+export async function deleteInquiryById(id: string): Promise<boolean> {
+  const rows = await getDb().delete(inquiries).where(eq(inquiries.id, id)).returning({ id: inquiries.id });
+  return rows.length > 0;
+}

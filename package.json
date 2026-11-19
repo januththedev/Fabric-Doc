@@ -15,7 +15,7 @@
     "check:media": "node scripts/check-media.mjs",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:seed": "tsx scripts/seed.ts",
+    "db:seed": "tsx scripts/seed.mts",
     "admin:hash": "node scripts/hash-password.mjs"
   },
   "dependencies": {
