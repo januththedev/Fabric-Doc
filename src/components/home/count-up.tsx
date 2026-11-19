@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
 
 /**
  * Counts a figure like "100%", "47+" or "4.5K+" up from zero the first time it scrolls into view.
@@ -9,12 +8,11 @@ import { useReducedMotion } from "motion/react";
  */
 export function CountUp({ value, className }: { value: string; className?: string }) {
   const match = /^(\D*)(\d+(?:\.\d+)?)(.*)$/.exec(value);
-  const reduce = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const [shown, setShown] = useState(value);
 
   useEffect(() => {
-    if (!match || reduce || !ref.current) return;
+    if (!match || !ref.current || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const [, prefix, num, suffix] = match;
     const target = parseFloat(num);
     const decimals = num.includes(".") ? num.split(".")[1].length : 0;
@@ -41,7 +39,7 @@ export function CountUp({ value, className }: { value: string; className?: strin
     };
     // The value is static for the life of the component.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reduce]);
+  }, []);
 
   return (
     <span ref={ref} className={className} aria-label={value}>

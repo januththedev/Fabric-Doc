@@ -31,7 +31,7 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="animate-rise" style={{ animationDelay: "0.1s" }}>
+          <div className="animate-slide">
             <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
               We Don&apos;t Just Clean — We <Accent tone="dark">Care</Accent> For Your Health.
             </h1>

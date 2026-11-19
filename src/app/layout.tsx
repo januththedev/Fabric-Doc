@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
-import { Toaster } from "@/components/ui/sonner";
 import { BUSINESS_INFO } from "@/config/business";
 import { MEDIA } from "@/config/media";
 import "./globals.css";
@@ -40,10 +39,9 @@ export const viewport: Viewport = { themeColor: "#0F766E", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="bg-surface font-sans text-slate-700 antialiased">
         {children}
-        <Toaster richColors position="top-center" />
       </body>
     </html>
   );

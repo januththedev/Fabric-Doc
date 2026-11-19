@@ -5,7 +5,7 @@ export function PageHero({ title, subtitle }: { title: ReactNode; subtitle?: str
   return (
     <section className="bg-night pb-16 pt-32 sm:pb-20 sm:pt-40">
       <div className="container-x">
-        <div className="animate-rise">
+        <div className="animate-slide">
           <h1 className="max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
             {title}
           </h1>

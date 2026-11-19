@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ReviewsExperience } from "@/components/reviews/reviews-experience";
 import { StarRating } from "@/components/shared/star-rating";
+import { Toaster } from "@/components/ui/sonner";
 import { BUSINESS_INFO } from "@/config/business";
 import { getMoments, getReviews, getServices } from "@/server/queries";
 
@@ -35,6 +36,7 @@ export default async function ReviewsPage() {
         </div>
       </section>
       <ReviewsExperience initialReviews={reviews} initialMoments={moments} services={services} />
+      <Toaster richColors position="top-center" />
     </>
   );
 }

@@ -194,11 +194,24 @@
 @utility animate-rise {
   animation: fd-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+/* Slide-up without a fade, for page headlines: they count as painted immediately (faster LCP). */
+@keyframes fd-slide {
+  from {
+    transform: translateY(28px);
+  }
+  to {
+    transform: none;
+  }
+}
+@utility animate-slide {
+  animation: fd-slide 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 @utility animate-settle {
   animation: fd-settle 1.4s ease-out both;
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-rise,
+  .animate-slide,
   .animate-settle {
     animation: none;
   }
@@ -218,4 +231,272 @@
 }
 @utility animate-marquee-reverse {
   animation: fd-marquee 70s linear infinite reverse;
+}
+
+/* ===================================================================================
+   Intro (≈1.8s): a glowing vacuum line sweeps a dusty logo clean, then the screen lifts away.
+   Plays once per session (see components/layout/intro.tsx).
+   =================================================================================== */
+.fd-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  background:
+    radial-gradient(42rem 26rem at 50% 48%, rgb(20 184 166 / 0.16), transparent 70%),
+    var(--color-night);
+  animation: fd-intro-out 0.5s cubic-bezier(0.7, 0, 0.2, 1) 1.35s both;
+}
+html[data-intro="seen"] .fd-intro {
+  display: none;
+}
+html[data-intro="skip"] .fd-intro {
+  animation: fd-intro-out 0.4s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fd-intro {
+    display: none;
+  }
+}
+.fd-intro-center {
+  text-align: center;
+}
+.fd-intro-logo {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+}
+.fd-intro-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.fd-intro-cleaned {
+  position: absolute;
+  inset: 0.75rem 1.25rem;
+  clip-path: inset(0 100% 0 0);
+  animation: fd-intro-reveal 0.85s cubic-bezier(0.55, 0.1, 0.35, 1) 0.15s both;
+}
+.fd-intro-mark {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: none;
+  border-radius: 1.1rem;
+}
+.fd-intro-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 8vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+/* Before: dull and dusty. */
+.fd-intro-dusty .fd-intro-mark {
+  background: #334155;
+  color: #64748b;
+}
+.fd-intro-dusty .fd-intro-name {
+  color: #475569;
+  filter: blur(0.6px);
+}
+/* After: crisp. */
+.fd-intro-cleaned .fd-intro-mark {
+  background: var(--color-brand-strong);
+  color: #fff;
+  box-shadow: 0 16px 44px -10px rgb(20 184 166 / 0.7);
+}
+.fd-intro-cleaned .fd-intro-name {
+  color: #fff;
+}
+/* The vacuum light: a bright line with a soft trail behind it. */
+.fd-intro-line {
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: #5eead4;
+  box-shadow:
+    0 0 14px 2px rgb(45 212 191 / 0.9),
+    0 0 48px 8px rgb(45 212 191 / 0.35);
+  animation:
+    fd-intro-sweep 0.85s cubic-bezier(0.55, 0.1, 0.35, 1) 0.15s both,
+    fd-intro-fade 0.25s ease 1s both;
+}
+.fd-intro-line::before {
+  content: "";
+  position: absolute;
+  inset-block: 15%;
+  right: 3px;
+  width: 7rem;
+  background: linear-gradient(90deg, transparent, rgb(45 212 191 / 0.18));
+}
+.fd-intro-speck {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 9999px;
+  background: #94a3b8;
+  opacity: 0.7;
+  animation: fd-intro-suck 0.3s ease-in both;
+}
+.fd-intro-tag {
+  margin-top: 1rem;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: rgb(203 213 225);
+  animation: fd-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.85s both;
+}
+@keyframes fd-intro-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes fd-intro-sweep {
+  to {
+    left: 100%;
+  }
+}
+@keyframes fd-intro-suck {
+  to {
+    transform: translateX(-14px) scale(0);
+    opacity: 0;
+  }
+}
+@keyframes fd-intro-out {
+  to {
+    transform: translateY(-100%);
+  }
+}
+@keyframes fd-intro-fade {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== Error-page illustration ===== */
+.fd-vac {
+  animation: fd-vac-move 3.2s ease-in-out infinite;
+}
+.fd-dust circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fd-dust 3.2s ease-in-out infinite;
+}
+.fd-sparkle path {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fd-twinkle 1.6s ease-in-out infinite;
+}
+@keyframes fd-vac-move {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-56px);
+  }
+}
+@keyframes fd-dust {
+  0%,
+  35%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+  55%,
+  80% {
+    opacity: 0;
+    transform: translate(18px, -10px) scale(0.2);
+  }
+}
+@keyframes fd-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Process timeline: drawn by scroll position in CSS (no JavaScript). Unsupported browsers show it complete. ===== */
+.fd-steps {
+  view-timeline-name: --fd-steps;
+}
+@keyframes fd-draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes fd-draw-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes fd-light {
+  from {
+    background-color: #e2e8f0;
+    color: #475569;
+  }
+  to {
+    background-color: #0f766e;
+    color: #fff;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .fd-steps .fd-draw-x {
+      animation: fd-draw-x linear both;
+      animation-timeline: --fd-steps;
+      animation-range: cover 20% cover 55%;
+    }
+    .fd-steps .fd-draw-y {
+      animation: fd-draw-y linear both;
+      animation-timeline: --fd-steps;
+      animation-range: cover 20% cover 55%;
+    }
+    .fd-steps .fd-step-icon {
+      animation: fd-light linear both;
+      animation-timeline: --fd-steps;
+      animation-range: cover 18% cover 24%;
+    }
+    .fd-steps .fd-step-icon[data-step="2"] {
+      animation-range: cover 34% cover 40%;
+    }
+    .fd-steps .fd-step-icon[data-step="3"] {
+      animation-range: cover 50% cover 56%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-vac,
+  .fd-dust circle,
+  .fd-sparkle path {
+    animation: none;
+  }
 }

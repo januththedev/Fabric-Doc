@@ -64,7 +64,7 @@ export default async function ServicePage({ params }: Props) {
             </Link>
           </nav>
           <h1
-            className="animate-rise mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl"
+            className="animate-slide mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl"
             style={{ animationDelay: "0.08s" }}
           >
             {service.title}

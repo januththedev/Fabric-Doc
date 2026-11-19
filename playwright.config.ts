@@ -4,7 +4,8 @@ export default defineConfig({
   testDir: "tests/e2e",
   fullyParallel: true,
   reporter: [["list"]],
-  use: { baseURL: "http://localhost:3100", trace: "retain-on-failure" },
+  // Reduced motion skips the 3s first-visit intro so it doesn't sit over every test; intro.spec.ts turns it back on.
+  use: { baseURL: "http://localhost:3100", trace: "retain-on-failure", contextOptions: { reducedMotion: "reduce" } },
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     { name: "mobile", use: { ...devices["Pixel 7"] } },
