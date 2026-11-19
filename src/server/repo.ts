@@ -104,3 +104,109 @@ export async function createInquiry(input: {
 }): Promise<void> {
   await getDb().insert(inquiries).values(input);
 }
+
+// ---------- services (Task 12) ----------
+
+export class DuplicateTitleError extends Error {
+  constructor() {
+    super("A service with this title already exists.");
+  }
+}
+export class DuplicateSlugError extends Error {
+  constructor() {
+    super("A service with this slug already exists.");
+  }
+}
+
+/** Drizzle wraps driver errors; the Postgres error (with its SQLSTATE and constraint name) is on `cause`. */
+function pgError(error: unknown): { code?: string; constraint?: string } | null {
+  const cause = (error as { cause?: unknown } | null)?.cause ?? error;
+  return cause && typeof cause === "object" ? (cause as { code?: string; constraint?: string }) : null;
+}
+
+function rethrowUnique(error: unknown): never {
+  const e = pgError(error);
+  if (e?.code === "23505") {
+    if (e.constraint === "services_title_key") throw new DuplicateTitleError();
+    if (e.constraint === "services_slug_key") throw new DuplicateSlugError();
+  }
+  throw error;
+}
+
+export async function insertService(input: {
+  slug: string;
+  title: string;
+  shortDesc: string;
+  highlights: string[];
+  imageUrl: string | null;
+  isActive: boolean;
+}): Promise<Service> {
+  const db = getDb();
+  try {
+    const [{ top }] = await db
+      .select({ top: sql<number>`coalesce(max(${services.sortOrder}), 0)` })
+      .from(services);
+    const [row] = await db
+      .insert(services)
+      .values({ ...input, sortOrder: Number(top) + 1 })
+      .returning();
+    return mapService(row);
+  } catch (error) {
+    return rethrowUnique(error);
+  }
+}
+
+/** `imageUrl: undefined` keeps the current image, `null` clears it, a string replaces it. */
+export async function updateServiceRow(
+  id: string,
+  patch: { title: string; shortDesc: string; highlights: string[]; isActive: boolean; imageUrl?: string | null },
+): Promise<{ service: Service; previousImageUrl: string | null } | null> {
+  const db = getDb();
+  try {
+    return await db.transaction(async (tx) => {
+      const [existing] = await tx.select().from(services).where(eq(services.id, id));
+      if (!existing) return null;
+      const [row] = await tx
+        .update(services)
+        .set({
+          title: patch.title,
+          shortDesc: patch.shortDesc,
+          highlights: patch.highlights,
+          isActive: patch.isActive,
+          ...(patch.imageUrl !== undefined ? { imageUrl: patch.imageUrl } : {}),
+        })
+        .where(eq(services.id, id))
+        .returning();
+      return { service: mapService(row), previousImageUrl: existing.imageUrl };
+    });
+  } catch (error) {
+    return rethrowUnique(error);
+  }
+}
+
+export async function deleteServiceRow(id: string): Promise<{ imageUrl: string | null } | null> {
+  const [row] = await getDb().delete(services).where(eq(services.id, id)).returning({ imageUrl: services.imageUrl });
+  return row ?? null;
+}
+
+/** Swaps a service with its neighbour, then renumbers every row 1..n so there are never ties. */
+export async function moveService(id: string, direction: "up" | "down"): Promise<void> {
+  await getDb().transaction(async (tx) => {
+    const rows = await tx
+      .select({ id: services.id })
+      .from(services)
+      .orderBy(asc(services.sortOrder), asc(services.createdAt));
+    const from = rows.findIndex((r) => r.id === id);
+    const to = direction === "up" ? from - 1 : from + 1;
+    if (from === -1 || to < 0 || to >= rows.length) return;
+    [rows[from], rows[to]] = [rows[to], rows[from]];
+    for (const [index, row] of rows.entries()) {
+      await tx.update(services).set({ sortOrder: index + 1 }).where(eq(services.id, row.id));
+    }
+  });
+}
+
+export async function setServiceActiveRow(id: string, isActive: boolean): Promise<boolean> {
+  const rows = await getDb().update(services).set({ isActive }).where(eq(services.id, id)).returning({ id: services.id });
+  return rows.length > 0;
+}

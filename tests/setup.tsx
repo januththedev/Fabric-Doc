@@ -24,3 +24,17 @@ class IntersectionObserverStub {
   }
 }
 vi.stubGlobal("IntersectionObserver", IntersectionObserverStub);
+
+// Radix UI (dialogs, selects) measures with ResizeObserver, which jsdom lacks.
+class ResizeObserverStub {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+vi.stubGlobal("ResizeObserver", ResizeObserverStub);
+// Radix also calls these on elements that jsdom does not implement (node-environment tests have no DOM at all).
+if (typeof Element !== "undefined") {
+  Element.prototype.scrollIntoView ??= () => {};
+  Element.prototype.hasPointerCapture ??= () => false;
+  Element.prototype.releasePointerCapture ??= () => {};
+}

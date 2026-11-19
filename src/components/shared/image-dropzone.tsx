@@ -19,7 +19,7 @@ type ImageDropzoneProps = {
 };
 
 /** Drag-and-drop or tap-to-choose photo field. On phones the system sheet offers camera and gallery. */
-export function ImageDropzone({ file, previewUrl, onSelect, onRemove, onReject, disabled, label }: ImageDropzoneProps) {
+export function ImageDropzone({ previewUrl, onSelect, onRemove, onReject, disabled, label }: ImageDropzoneProps) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { "image/*": [".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif"] },
     multiple: false,
