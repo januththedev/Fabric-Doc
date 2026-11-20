@@ -13,7 +13,15 @@ test("intro plays on the first visit, then gets out of the way", async ({ page }
     const box = await intro.boundingBox();
     expect(box === null || box.y + box.height <= 1).toBe(true);
   }).toPass({ timeout: 6000 });
-  await page.getByRole("link", { name: "Explore All Moments & Leave a Review" }).click();
+  // Smooth scrolling is on in this test, so let the page settle on the link before clicking it.
+  const link = page.getByRole("link", { name: "Explore All Moments & Leave a Review" });
+  await link.scrollIntoViewIfNeeded();
+  await expect(async () => {
+    const y1 = (await link.boundingBox())!.y;
+    await page.waitForTimeout(150);
+    expect((await link.boundingBox())!.y).toBe(y1);
+  }).toPass({ timeout: 5000 });
+  await link.click();
   await expect(page).toHaveURL(/\/reviews#moments$/);
 });
 
