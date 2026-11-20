@@ -6,12 +6,12 @@ export function AdminHeader({ email }: { email: string }) {
   return (
     <header className="border-b border-slate-200 bg-white">
       <div className="container-x flex h-16 items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <Logo />
-          <span className="rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-semibold text-teal-800">Admin</span>
+        <div className="flex min-w-0 items-center gap-3">
+          <Logo className="[&>span]:hidden sm:[&>span]:inline" />
+          <span className="rounded-full bg-sun-soft px-2.5 py-0.5 text-xs font-bold text-night">Admin</span>
         </div>
-        <div className="flex items-center gap-4 text-sm">
-          <span className="hidden text-slate-600 sm:inline">{email}</span>
+        <div className="flex shrink-0 items-center gap-3 whitespace-nowrap text-sm sm:gap-4">
+          <span className="hidden text-slate-600 md:inline">{email}</span>
           <Link href="/" target="_blank" className="font-medium text-brand-strong hover:underline">
             View site
           </Link>

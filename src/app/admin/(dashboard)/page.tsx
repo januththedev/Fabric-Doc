@@ -52,9 +52,9 @@ export default async function AdminDashboardPage({
       <h1 className="font-display text-3xl font-extrabold text-ink">Dashboard</h1>
 
       <Tabs value={tab} className="mt-6">
-        <TabsList className="h-auto w-full flex-wrap justify-start gap-1 rounded-full bg-white p-1 shadow-soft ring-1 ring-slate-200/70 sm:w-fit">
+        <TabsList className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-full bg-white p-1 ring-1 ring-ink/10 [scrollbar-width:none] sm:w-fit">
           {tabs.map((item) => (
-            <TabsTrigger key={item.value} value={item.value} asChild className="h-11 rounded-full px-4 text-sm font-medium">
+            <TabsTrigger key={item.value} value={item.value} asChild className="h-11 shrink-0 rounded-full px-4 text-sm font-semibold data-[state=active]:bg-ink data-[state=active]:text-white">
               <Link href={`/admin?tab=${item.value}`}>{item.label}</Link>
             </TabsTrigger>
           ))}
