@@ -55,7 +55,7 @@ export function ServicesShowcase({ services }: { services: readonly Service[] })
                     />
                   ) : (
                     <div className="grid size-full place-items-center bg-brand-strong">
-                      <Image src="/brand/mascot.png" alt="" width={272} height={240} className="h-28 w-auto" />
+                      <Image src="/brand/mascot.png" alt="" width={560} height={502} className="h-28 w-auto" />
                     </div>
                   )}
                 </Link>

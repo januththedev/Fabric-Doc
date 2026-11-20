@@ -33,7 +33,7 @@ function Wordmark() {
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element -- must paint with the first HTML, before any JS */}
-      <img className="fd-intro-mark" src="/brand/mascot.png" alt="" width={272} height={240} />
+      <img className="fd-intro-mark" src="/brand/mascot.png" alt="" width={560} height={502} />
       <span className="fd-intro-name">{BUSINESS_INFO.brandName}</span>
     </>
   );

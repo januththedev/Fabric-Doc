@@ -21,8 +21,8 @@ export function PageHero({ title, subtitle }: { title: ReactNode; subtitle?: str
         <Image
           src="/brand/mascot.png"
           alt=""
-          width={272}
-          height={240}
+          width={560}
+          height={502}
           priority
           className="fd-hero-mascot hidden h-40 w-auto shrink-0 lg:block"
         />

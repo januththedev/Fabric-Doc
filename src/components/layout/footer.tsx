@@ -158,8 +158,8 @@ export function Footer({ services }: { services: readonly Pick<Service, "title">
         <Image
           src="/brand/mascot.png"
           alt=""
-          width={272}
-          height={240}
+          width={560}
+          height={502}
           className="fd-word-mascot absolute right-[6vw] bottom-[34%] z-0 h-[12vw] min-h-12 w-auto [mask-image:linear-gradient(to_bottom,black_72%,transparent)]"
         />
         <p className="fd-word">
