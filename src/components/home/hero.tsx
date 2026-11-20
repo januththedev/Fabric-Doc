@@ -86,8 +86,8 @@ export function Hero() {
           <Image
             src="/brand/mascot.png"
             alt=""
-            width={272}
-            height={240}
+            width={560}
+            height={502}
             priority
             className="fd-hero-mascot absolute bottom-0 -left-4 h-32 w-auto drop-shadow-[0_16px_24px_rgb(11_17_32/0.35)] sm:-left-10 sm:h-44 lg:-left-16 lg:h-52"
           />

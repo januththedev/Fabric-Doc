@@ -13,8 +13,8 @@ export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; cl
       <Image
         src="/brand/mascot.png"
         alt=""
-        width={272}
-        height={240}
+        width={560}
+        height={502}
         priority
         className="h-12 w-auto drop-shadow-sm transition-transform duration-300 group-hover:-rotate-6"
       />
